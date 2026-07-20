@@ -1,0 +1,11 @@
+[submodule "AdamSim"]
+    path = AdamSim
+    url = https://github.com/Mobile-Robots-Group-UC3M/AdamSim
+
+[submodule "ArucoDetection"]
+    path = ArucoDetection
+    url = https://github.com/Mobile-Robots-Group-UC3M/ArucoDetection
+
+[submodule "GPflowSampling"]
+    path = GPflowSampling
+    url = https://github.com/j-wilson/GPflowSampling
