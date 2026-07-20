@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<robot name="water_bottle02">
+
+<material name="purple blue 01">
+  <color rgba="0.47 0.32 0.66 1.000"/>
+</material>
+
+<material name="purple blue 02">
+  <color rgba="0.47 0.32 0.66 0.9"/>
+</material>
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="5.009931207004187e-07 -1.4667589132518843e-07 0.1147607624331736" rpy="0 0 0"/>
+    <mass value="3.3357948118780234"/>
+    <inertia ixx="0.015103644001073752" iyy="0.015103622037953762" izz="0.000973431537889193" ixy="8.530316628479419e-09" iyz="-7.847796005427423e-09" ixz="1.7990889735487536e-08"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="purple blue 02"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+     <contact>
+    <soft_cfm value="0.0"/>
+      <soft_erp value="0.2"/>
+  </contact>
+  </collision>
+</link>
+
+<link name="cap1">
+  <inertial>
+    <origin xyz="2.0429340606851415e-17 0.0 0.015045678419924796" rpy="0 0 0"/>
+    <mass value="1.3822377244708834"/>
+    <inertia ixx="7.7962097677374e-05" iyy="7.796209767737747e-05" izz="9.822237710753439e-05" ixy="0.0" iyz="1.5617729332007002e-19" ixz="-4.383924630603961e-20"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.0 -0.233626" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/cap1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="purple blue 01"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 -0.0 -0.233626" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/cap1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+     <contact>
+    <soft_cfm value="0.0"/>
+      <soft_erp value="0.2"/>
+  </contact>
+  </collision>
+</link>
+
+<joint name="Rigid_1" type="fixed">
+  <origin xyz="0.0 0.0 0.233626" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="cap1"/>
+</joint>
+
+</robot>

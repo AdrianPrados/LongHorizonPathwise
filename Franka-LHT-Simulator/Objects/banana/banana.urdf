@@ -1,0 +1,130 @@
+<?xml version="1.0" ?>
+<robot name="banana">
+
+<material name="silver">
+  <color rgba="0.98 0.93 0.36 1.000"/>
+</material>
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="-0.01153903931698902 1.3565778413125364e-05 0.03702192970338306" rpy="0 0 0"/>
+    <mass value="1.47929354119489376"/>
+    <inertia ixx="0.0001409898550376698" iyy="0.00015008106164970058" izz="0.00010270082755563099" ixy="-1.670235586073203e-06" iyz="-7.185627833923014e-07" ixz="2.773053462475886e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <contact>
+      <soft_cfm value="0.0"/>
+      <soft_erp value="0.2"/>
+  </contact>
+  </collision>
+</link>
+
+<link name="banana_11">
+  <inertial>
+    <origin xyz="0.011198346658511174 0.0002503402081603441 -0.0005188368771734675" rpy="0 0 0"/>
+    <mass value="1.21305073048535864"/>
+    <inertia ixx="4.020067211477139e-07" iyy="1.5254890436888963e-06" izz="1.6344871079093654e-06" ixy="-7.975018690070942e-11" iyz="-1.5247830532012021e-09" ixz="-2.3730715415079193e-08"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.04 6.1e-05 -0.140992" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/banana_11.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.04 6.1e-05 -0.140992" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/banana_11.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <contact>
+      <soft_cfm value="0.0"/>
+      <soft_erp value="0.2"/>
+  </contact>
+  </collision>
+</link>
+
+<link name="banana_31">
+  <inertial>
+    <origin xyz="0.015965496311342572 -0.0009649742913347116 0.010743344140724947" rpy="0 0 0"/>
+    <mass value="1.3566627670879692"/>
+    <inertia ixx="5.593838448001657e-05" iyy="9.12979029264703e-05" izz="9.723502170257665e-05" ixy="7.966116104062015e-07" iyz="7.74872458000115e-07" ixz="-7.524888667503481e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.005828 -0.0013 -0.126288" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/banana_31.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.005828 -0.0013 -0.126288" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/banana_31.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <contact>
+      <soft_cfm value="0.0"/>
+      <soft_erp value="0.2"/>
+  </contact>
+  </collision>
+</link>
+
+<link name="banana_21">
+  <inertial>
+    <origin xyz="0.0011909714821306608 0.0005576133176566685 0.0347343242314844" rpy="0 0 0"/>
+    <mass value="0.7447759607492765"/>
+    <inertia ixx="0.0003775589095185673" iyy="0.0003847372229822642" izz="0.00016676664021554672" ixy="-1.550802130338407e-06" iyz="-8.343721782560476e-06" ixz="-2.8803262700124012e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.018164 -0.000449 -0.059807" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/banana_21.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.018164 -0.000449 -0.059807" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/banana_21.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <contact>
+      <soft_cfm value="0.0"/>
+      <soft_erp value="0.2"/>
+  </contact>
+  </collision>
+</link>
+
+<joint name="Rigid_1" type="fixed">
+  <origin xyz="0.045828 -0.001361 0.014704" rpy="0 0 0"/>
+  <parent link="banana_31"/>
+  <child link="banana_11"/>
+</joint>
+
+<joint name="Rigid_2" type="fixed">
+  <origin xyz="0.012336 0.000851 0.066481" rpy="0 0 0"/>
+  <parent link="banana_21"/>
+  <child link="banana_31"/>
+</joint>
+
+<joint name="Rigid_3" type="fixed">
+  <origin xyz="-0.018164 0.000449 0.059807" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="banana_21"/>
+</joint>
+
+</robot>

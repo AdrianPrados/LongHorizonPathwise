@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<robot name="Rack">
+
+<material name="silver">
+  <color rgba="0.76 0.60 0.42 1.000"/>
+</material>
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="-0.019999999999999896 0.03500000000000014 0.5555587668950039" rpy="0 0 0"/>
+    <mass value="64.60228133775149"/>
+    <inertia ixx="9.56223752505463" iyy="11.412916055809422" izz="2.8814763085617394" ixy="9.020562075079397e-17" iyz="-0.0001228586723074354" ixz="0.00028845079586337086"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision concave="yes">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+     <contact>
+    <soft_cfm value="0.0"/>
+      <soft_erp value="0.2"/>
+  </contact>
+  </collision>
+</link>
+
+</robot>

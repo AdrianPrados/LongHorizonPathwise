@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<robot name="Bucket_cap_v02">
+
+<material name="silver">
+  <color rgba="0.700 0.700 0.700 1.000"/>
+</material>
+
+<material name="wood">
+  <color rgba="0.631 0.4 0.184 1.000"/>
+</material>
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="-1.3698582641782818e-17 -4.648239695837313e-19 0.011144660308718649" rpy="0 0 0"/>
+    <mass value="7.577271680557124"/>
+    <inertia ixx="0.023906641966828998" iyy="0.02390664196683623" izz="0.04679532380815405" ixy="4.194246553212651e-18" iyz="-1.9087611007673963e-21" ixz="5.833996942941701e-19"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+     <contact>
+      <soft_cfm value="0.0"/>
+      <soft_erp value="0.2"/>
+     </contact>
+  </collision>
+</link>
+
+<link name="cap_11">
+  <inertial>
+    <origin xyz="1.4684715891794288e-18 -1.4470732507596378e-18 0.022554234445881158" rpy="0 0 0"/>
+    <mass value="1.7056617097052832"/>
+    <inertia ixx="0.00023029765918235624" iyy="0.0002302976591823597" izz="0.00022410336710397387" ixy="7.293566325015974e-21" iyz="-1.6704220770129663e-20" ixz="1.828649446112026e-20"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.0 -0.038" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/cap_11.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="wood"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 -0.0 -0.038" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/cap_11.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+     <contact>
+      <soft_cfm value="0.0"/>
+      <soft_erp value="0.2"/>
+  </contact>
+  </collision>
+</link>
+
+<joint name="Rigid_1" type="fixed">
+  <origin xyz="0.0 0.0 0.038" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="cap_11"/>
+</joint>
+
+</robot>

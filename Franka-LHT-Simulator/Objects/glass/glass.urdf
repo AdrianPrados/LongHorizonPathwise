@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<robot name="cup">
+
+<material name="silver">
+  <color rgba="0.53 0.81 0.92 1.0"/>
+</material>
+
+<link  name="base_link">
+  <inertial>
+    <origin xyz="1.0017540500466136e-13 1.2974408108361789e-17 0.04365529200885401" rpy="0 0 0"/>
+    <mass value="3.0558838849735995"/>
+    <inertia ixx="3.433017181374287e-05" iyy="3.4330171790118906e-05" izz="1.7975664225868897e-05" ixy="2.11457518162603e-20" iyz="-1.9696491235563548e-20" ixz="1.3216458708385083e-16"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+     
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+     <contact>
+      <soft_cfm value="0.0"/>
+      <soft_erp value="0.2"/>
+  </contact>
+  </collision>
+</link>
+
+</robot>

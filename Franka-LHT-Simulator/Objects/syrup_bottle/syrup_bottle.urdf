@@ -1,0 +1,137 @@
+<?xml version="1.0" ?>
+<robot name="syrup_bottle_hamdard">
+
+<material name="syrup">
+  <color rgba="0.2 0.2 0.2 1.000"/>
+</material>
+<material name="label">
+  <color rgba="0.4 0.5 0.2 1.000"/>
+</material>
+<material name="cap">
+  <color rgba="0.3 0.4 0.5 1.000"/>
+</material>
+
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="4.934289947548106e-09 -3.2225065737251766e-09 0.011631590799827753" rpy="0 0 0"/>
+    <mass value="2.4197644859239624"/>
+    <inertia ixx="7.636976861248487e-06" iyy="7.636972233043568e-06" izz="1.2952930108645787e-05" ixy="2.39809794822739e-12" iyz="-1.4847825472360082e-12" ixz="2.273493456966391e-12"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="syrup"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <contact>
+      <soft_cfm value="0.0"/>
+      <soft_erp value="0.2"/>
+  </contact>
+  </collision>
+</link>
+
+<link name="syrup_bottle1Component51">
+  <inertial>
+    <origin xyz="-4.258148684713765e-08 -5.132816009368364e-08 0.009451222640652346" rpy="0 0 0"/>
+    <mass value="1.3143983196324477"/>
+    <inertia ixx="9.997246824698571e-07" iyy="9.99720290526451e-07" izz="1.207189092517859e-06" ixy="-3.520512116998867e-12" iyz="-1.6691597034151787e-13" ixz="-1.4722253985932964e-13"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.0 -0.137" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/syrup_bottle1Component51.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="cap"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 -0.0 -0.137" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/syrup_bottle1Component51.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <contact>
+      <soft_cfm value="0.0"/>
+      <soft_erp value="0.2"/>
+  </contact>
+  </collision>
+</link>
+
+<link name="syrup_bottle1Component31">
+  <inertial>
+    <origin xyz="-4.55710921680438e-18 0.0 0.01958792796595507" rpy="0 0 0"/>
+    <mass value="1.7484141742909835"/>
+    <inertia ixx="2.2913746704419057e-05" iyy="2.291374668682495e-05" izz="1.6910522809938658e-05" ixy="6.821210263296961e-21" iyz="-1.3642420526593922e-20" ixz="1.149074041793636e-19"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.0 -0.0835" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/syrup_bottle1Component31.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="syrup"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 -0.0 -0.0835" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/syrup_bottle1Component31.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <contact>
+      <soft_cfm value="0.0"/>
+      <soft_erp value="0.2"/>
+  </contact>
+  </collision>
+</link>
+
+<link name="syrup_bottle1Component41">
+  <inertial>
+    <origin xyz="0.0 0.0 0.03149992485838196" rpy="0 0 0"/>
+    <mass value="2.1484406070507218"/>
+    <inertia ixx="7.229086570383048e-05" iyy="7.229086570382907e-05" izz="4.638780156287693e-05" ixy="1.3642420526593922e-20" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.0 -0.0205" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/syrup_bottle1Component41.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="label"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 -0.0 -0.0205" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/syrup_bottle1Component41.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <contact>
+      <soft_cfm value="0.0"/>
+      <soft_erp value="0.2"/>
+  </contact>
+  </collision>
+</link>
+
+<joint name="syrup_bottle1_Rigid 4" type="fixed">
+  <origin xyz="0.0 0.0 0.0535" rpy="0 0 0"/>
+  <parent link="syrup_bottle1Component31"/>
+  <child link="syrup_bottle1Component51"/>
+</joint>
+
+<joint name="syrup_bottle1_Rigid 5" type="fixed">
+  <origin xyz="0.0 0.0 0.063" rpy="0 0 0"/>
+  <parent link="syrup_bottle1Component41"/>
+  <child link="syrup_bottle1Component31"/>
+</joint>
+
+<joint name="syrup_bottle1_Rigid 6" type="fixed">
+  <origin xyz="0.0 0.0 0.0205" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="syrup_bottle1Component41"/>
+</joint>
+
+</robot>

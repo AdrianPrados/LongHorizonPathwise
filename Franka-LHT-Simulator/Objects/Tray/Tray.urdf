@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<robot name="Tray">
+
+<material name="silver">
+  <color rgba="0.59 0.39 0.20 1.000"/>
+</material>
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="1.474116824273432e-16 -5.896467297093729e-17 0.014346152848733229" rpy="0 0 0"/>
+    <mass value="5.843261600000017"/>
+    <inertia ixx="0.034612862052769776" iyy="0.07906784160476914" izz="0.11052175860106632" ixy="1.8277205526828759e-16" iyz="2.5889046815334736e-17" ixz="-2.4027276607507167e-17"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision concave="yes">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <contact>
+      <soft_cfm value="0.0"/>
+      <soft_erp value="0.2"/>
+  </contact>
+  </collision>
+</link>
+
+</robot>

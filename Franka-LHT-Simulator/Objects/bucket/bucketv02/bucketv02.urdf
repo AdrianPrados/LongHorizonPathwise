@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<robot name="bucketv02">
+
+<material name="silver">
+  <color rgba="0.700 0.700 0.700 1.000"/>
+</material>
+
+<link concave="yes" name="base_link">
+  <inertial>
+    <origin xyz="7.250133928720036e-16 4.531333705450022e-16 0.0668566064027197" rpy="0 0 0"/>
+    <mass value="2.5755920603089713"/>
+    <inertia ixx="0.015265971520158655" iyy="0.015265971520156938" izz="0.01952225792615186" ixy="1.656371750868862e-16" iyz="1.1056039150038028e-16" ixz="2.305859176356679e-16"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/bucket.obj" />
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <!--collision concave="yes">
+    <origin xyz="0 0.1 0" rpy="1.5708 0 0"/>
+    <geometry>
+      <cylinder radius="0.12" length="0.12"/>
+    </geometry>
+  </collision-->
+  <!--collision concave="yes">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/bucket.obj"/>
+    </geometry>
+    <contact>
+      <soft_cfm value="0.0"/>
+      <soft_erp value="0.2"/>
+  </contact>
+  </collision-->
+</link>
+
+</robot>

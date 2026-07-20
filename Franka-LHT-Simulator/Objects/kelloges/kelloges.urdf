@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<robot name="kelloges">
+
+<material name="silver">
+  <color rgba="1 1 1 1.000"/>
+</material>
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.0 0.0 0.1" rpy="0 0 0"/>
+    <mass value="5.792000000000002"/>
+    <inertia ixx="0.030478933333333305" iyy="0.04366693333333328" izz="0.015532533333333327" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/kellogesbox.obj" scale="0.01 0.01 0.01"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <contact>
+ <friction_anchor/>
+ <soft_cfm value="0.0"/>
+  <soft_erp value="0.2"/>
+  </contact>
+  </collision>
+
+</link>
+
+</robot>

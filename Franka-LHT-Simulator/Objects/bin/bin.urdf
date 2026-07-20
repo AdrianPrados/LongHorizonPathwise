@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<robot name="bin">
+
+<material name="silver">
+  <color rgba="0.700 0.700 0.700 1.000"/>
+</material>
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="3.1729425329795976e-12 -1.0759031648338314e-11 0.0821207117516375" rpy="0 0 0"/>
+    <mass value="3.3306200306822658"/>
+    <inertia ixx="0.029908308246302445" iyy="0.029908308247975544" izz="0.028842040628059794" ixy="3.391198406347926e-12" iyz="-8.055687472696002e-13" ixz="3.6990676760260784e-13"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/decomp.obj" scale="0.01 0.01 0.0015"/>
+    </geometry>
+  </collision>
+</link>
+
+</robot>

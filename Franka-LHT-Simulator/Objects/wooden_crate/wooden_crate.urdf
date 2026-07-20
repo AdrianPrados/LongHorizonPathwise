@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<robot name="bottle">
+
+<material name="silver">
+  <color rgba="1 1 1 1.000"/>
+</material>
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="-0.00020925756291659248 -0.0004549983241387025 0.05564650474976721" rpy="0 0 0"/>
+    <mass value="21.046549725774398"/>
+    <inertia ixx="0.18342407203944716" iyy="0.28142836278065264" izz="0.3770194552619844" ixy="2.667790051158333e-06" iyz="0.00018533187394991955" ixz="8.523569036665113e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/wooden_bottle_crate.obj" scale="0.01 0.01 0.01"/>
+    </geometry>
+     <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/decomp.obj" scale="0.01 0.01 0.006"/>
+    </geometry>
+  </collision>
+</link>
+
+</robot>

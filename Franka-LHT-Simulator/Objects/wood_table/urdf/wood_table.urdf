@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="wood_table">
+  <link
+    name="base_link">
+    <contact>
+      <soft_cfm value="0.0"/>
+      <soft_erp value="0.2"/>
+  </contact>
+    <inertial>
+      <origin
+        xyz="0.62688 0.7221 0.78762"
+        rpy="0 0 0" />
+      <mass
+        value="13.023" />
+      <inertia
+        ixx="1.7505"
+        ixy="0.0002588"
+        ixz="-0.00037071"
+        iyy="3.9252"
+        iyz="0.0012951"
+        izz="3.6809" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wood_table/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="metal">
+        <color
+          rgba="0.96078 0.96078 0.96471 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wood_table/meshes/base_link.STL" />
+      </geometry>
+      <contact>
+      <soft_cfm value="0.0"/>
+      <soft_erp value="0.2"/>
+  </contact>
+    </collision>
+  </link>
+  <link
+    name="link1">
+    <inertial>
+      <origin
+        xyz="-1.8294E-07 0.0011985 0.011"
+        rpy="0 0 0" />
+      <mass
+        value="28.694" />
+      <inertia
+        ixx="0.91853"
+        ixy="1.2557E-06"
+        ixz="-5.3099E-19"
+        iyy="2.9267"
+        iyz="1.4963E-18"
+        izz="3.8429" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wood_table/meshes/link1.STL" />
+      </geometry>
+      <material
+        name="wood">
+        <color
+          rgba="0.8 0.74 0.52 1" />
+      </material>
+    </visual>
+    <collision convex_hull="yes" >
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wood_table/meshes/link1.STL" />
+      </geometry>
+      
+      <contact>
+      <soft_cfm value="0.0"/>
+      <soft_erp value="0.2"/>
+  </contact>
+    </collision>
+  </link>
+  <joint
+    name="joint1"
+    type="fixed">
+    <origin
+      xyz="0.61948 -1.1344 0.70815"
+      rpy="1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="link1" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+</robot>

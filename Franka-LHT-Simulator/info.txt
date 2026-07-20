@@ -1,0 +1,27 @@
+Each Trajectory has location.txt which tells where exactly the objects are loaded
+The trajectories in the folder ./Trajectory have subdirectories that corresponds to the following->
+
+Scene 1->
+1-10 -> pick and place Banana in basket then cover the cap
+11-20 -> pick and place Ycbgelatin in basket then cover the cap
+21-30 -> pick and place Carrot in basket then cover the cap
+31-40 -> pick and place Strawberry in basket then cover the cap
+41-50 -> place glass on table and fill it from juice bottle
+51-60 -> pick and place glass in basket then cover the cap
+
+
+Scene 2->
+1-10 -> Syring in bin, Sunscreen in bin
+11-20 -> Sunscreen in tray, Syrup bottle in bin
+21-30 -> Syring in tray, Syrup bottle in tray
+31-40 -> Syrup Bottle in bin, Sunscreen in bin
+41-50 -> Sunscreen in bin, Syring in tray
+51-60 -> Syrup bottle in bin, Syring in bin
+
+Scene 3->
+1-10 -> Pack right, left bottles in behind, front slot respectively
+11-20 -> Pack dominosugar, YcbMustardBottle
+21-30 -> Pack kelloges, dominosugar
+31-40 -> Pack YcbMustardBottle, kelloges
+41-50 -> Pack dominosugar, right bottle(behind)
+51-60 -> Pack right bottle(front), YcbMustardBottle

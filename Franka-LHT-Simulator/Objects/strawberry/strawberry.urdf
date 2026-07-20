@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<robot name="strawberry">
+
+<material name="red">
+  <color rgba="0.92 0.20 0.35 1.000"/>
+</material>
+<material name="green">
+  <color rgba="0.0 1.0 0.0 1.000"/>
+</material>
+
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+    <mass value="1.2"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="red"/>
+    <material/>
+  </visual>
+  <collision concave="yes">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link_col.stl" scale="0.0008 0.0008 0.0008"/>
+    </geometry>
+     <contact>
+    <soft_cfm value="0.0"/>
+      <soft_erp value="0.2"/>
+  </contact>
+  </collision>
+</link>
+
+<link name="leaf1">
+  <inertial>
+    <origin xyz="0.00022759153920535322 0.0017307134739732465 0.000500000759959221" rpy="0 0 0"/>
+    <mass value="0.54260231966086"/>
+    <inertia ixx="4.626098642629739e-07" iyy="3.7135835812823516e-07" izz="8.330638851917674e-07" ixy="2.52146951822774e-09" iyz="9.529120656610879e-22" ixz="-9.26442286059391e-23"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.0 -0.051" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/leaf1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="green"/>
+    <material/>
+  </visual>
+  <collision cocave="yes">
+    <origin xyz="-0.0 -0.0 -0.051" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/leaf1_col.stl" scale="0.0008 0.0008 0.008"/>
+    </geometry>
+     <contact>
+    <soft_cfm value="0.0"/>
+      <soft_erp value="0.2"/>
+  </contact>
+  </collision>
+</link>
+
+<joint name="Rigid_1" type="fixed">
+  <origin xyz="0.0 0.0 0.051" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="leaf1"/>
+</joint>
+
+</robot>

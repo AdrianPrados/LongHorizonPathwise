@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<robot name="cardboard">
+
+<material name="silver">
+  <color rgba="0.9 0.9 0.9 1.000"/>
+</material>
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="-1.800566012109954e-16 7.562377250861806e-16 0.07292407288622794" rpy="0 0 0"/>
+    <mass value="7.9303211999999705"/>
+    <inertia ixx="0.16190189155507878" iyy="0.10630935963508006" izz="0.2179258215431983" ixy="9.138602763414372e-16" iyz="3.116850499389211e-16" ixz="4.4373523968372045e-17"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/cardboardbox.obj" scale="0.01 0.01 0.01"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/decomp.obj" scale="0.01 0.01 0.0015"/>
+    </geometry>
+  </collision>
+</link>
+
+</robot>

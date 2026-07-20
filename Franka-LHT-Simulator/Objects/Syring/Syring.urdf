@@ -1,0 +1,103 @@
+<?xml version="1.0" ?>
+<robot name="Syring">
+
+<!-- <material name="silver">
+  <color rgba="0.700 0.700 0.700 1.000"/>
+</material> -->
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="-9.69676812777065e-05 -3.7062129761333643e-06 -0.059489805024728816" rpy="0 0 0"/>
+    <mass value="2.160402332109307"/>
+    <inertia ixx="5.519511350339627e-05" iyy="5.4766030198631136e-05" izz="7.346982750624242e-06" ixy="-6.598385487962793e-10" iyz="-6.950057171044761e-09" ixz="-1.93024270303283e-07"/>
+  </inertial>
+    
+  <visual>
+    <material name="silver">
+      <color rgba="1 1 1 0.5"/>
+    </material>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    
+  </visual>
+  <collision >
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+      <contact>
+      <soft_cfm value="0.0"/>
+      <soft_erp value="0.2"/>
+  </contact>
+  </collision>
+</link>
+
+<link name="pusher1">
+  <inertial>
+    <origin xyz="-9.808940367053015e-06 2.8392271765312675e-05 0.07304535105591148" rpy="0 0 0"/>
+    <mass value="2.0758222238993023"/>
+    <inertia ixx="1.8679938527088004e-05" iyy="1.8679755196229935e-05" izz="7.163776494351196e-07" ixy="-2.9961444546012886e-12" iyz="-1.5600143718487594e-08" ixz="5.42754991670739e-09"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.0 0.08094" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/pusher1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black">
+    <color rgba="0.1 0.1 0.1 1"/>
+    </material>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 -0.0 0.08094" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/pusher1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+      <contact>
+      <soft_cfm value="0.0"/>
+      <soft_erp value="0.2"/>
+  </contact>
+  </collision>
+</link>
+
+<link name="rubber1">
+  <inertial>
+    <origin xyz="-1.3360868227109907e-18 0.0 0.004000080987635005" rpy="0 0 0"/>
+    <mass value="1.736422164184656"/>
+    <inertia ixx="1.8185887601233387e-07" iyy="1.8185887601234065e-07" izz="3.1319591560670543e-07" ixy="2.5313084961453567e-22" iyz="-5.062616992290713e-22" ixz="-3.8020878614324406e-25"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.0 0.08894" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/rubber1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="blak">
+    <color rgba="0.3 0.3 0.3 1"/>
+    </material>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 -0.0 0.08894" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/rubber1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+      <contact>
+      <soft_cfm value="0.0"/>
+      <soft_erp value="0.2"/>
+  </contact>
+  </collision>
+</link>
+
+<joint name="Rigid_3" type="fixed">
+  <origin xyz="0.0 0.0 0.008" rpy="0 0 0"/>
+  <parent link="rubber1"/>
+  <child link="pusher1"/>
+</joint>
+
+<joint name="Rigid_4" type="fixed">
+  <origin xyz="0.0 0.0 -0.08894" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="rubber1"/>
+</joint>
+
+</robot>
