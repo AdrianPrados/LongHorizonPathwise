@@ -63,8 +63,8 @@
 
   <title>ADAPT: A Safe Dual-Arm Teleoperation Framework for Data Collection on ADAM</title>
   
-  <link rel="icon" type="image/x-icon" href="static/images/LogoADAMSim.ico">
-  <link rel="apple-touch-icon" href="static/images/LogoADAMSim.ico">
+  <link rel="icon" type="image/x-icon" href="static/images/Humanoids.ico">
+  <link rel="apple-touch-icon" href="static/images/Humanoids.ico">
   
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/index.css">
@@ -150,7 +150,7 @@
     "@type": "Organization",
     "name": "INSTITUTION_OR_LAB_NAME",
     "url": "https://YOUR_INSTITUTION_WEBSITE.com",
-    "logo": "https://YOUR_DOMAIN.com/static/images/LogoADAMSim.ico",
+    "logo": "https://YOUR_DOMAIN.com/static/images/Humanoids.ico",
     "sameAs": [
       "https://twitter.com/YOUR_TWITTER_HANDLE",
       "https://github.com/YOUR_GITHUB_USERNAME"
@@ -214,7 +214,7 @@
         <div class="container is-max-desktop">
           <div class="columns is-centered">
             <div class="column has-text-centered">
-              <h1 class="title is-1 publication-title">ADAPT: A Safe Dual-Arm Teleoperation Framework for Data Collection on ADAM</h1>
+              <h1 class="title is-1 publication-title">Learn Once, Adapt Anytime: Unifying Explicit Segmentation and Pathwise Conditioning for Long-Horizon Manipulation</h1>
               <div class="is-size-5 publication-authors">
                 <span class="author-block">
                   <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">Laura Pons</a><sup>*</sup>,</span>
@@ -230,8 +230,8 @@
                     </div>
 
                     <div class="is-size-5 publication-authors">
-                      <span class="author-block">Mobile Robots Group, RoboticsLab, University Carlos III<br>ROBOT 2026</span>
-                      <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+                      <span class="author-block">Research Lab Group<br>Humanoids 2026</span>
+                      <!--span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span-->
                     </div>
 
                     <div class="column has-text-centered">
@@ -247,7 +247,7 @@
                       </span>
 
                       <span class="link-block">
-                      <a href="https://github.com/Mobile-Robots-Group-UC3M/adapt" target="_blank"
+                      <a href="https://github.com/<CODE>" target="_blank"
                       class="external-link button is-normal is-rounded is-dark">
                       <span class="icon">
                         <i class="fab fa-github"></i>
@@ -266,7 +266,7 @@
     <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
           <div class="column is-four-fifths">
-            <img src="static/images/IntroPaper.jpg" alt="Abstract illustration" style="max-width: 100%; height: auto; margin-top: 2rem; margin-bottom: 2rem;" />
+            <img src="static/images/IntroPaperHumanoids.png" alt="Abstract illustration" style="max-width: 100%; height: auto; margin-top: 2rem; margin-bottom: 2rem;" />
           </div>
         </div>
       </div>
@@ -277,7 +277,15 @@
               <h2 class="title is-3">Abstract</h2>
               <div class="content has-text-justified">
                 <p>
-                  To successfully train robotic systems through Learning from Demonstrations, large and high-quality datasets of human demonstrations are normally required. However, dual-arm data collection is severely bottlenecked by prohibitive hardware costs, complex dual-arm coordination, and a persistent risk of self-collisions, which restricts the deployment of these platforms. In this work, we present ADAPT (ADAM Dual-Arm Platform for Teleoperation), a comprehensive hardware and software framework based on GELLO that enables safe, intuitive, and low-cost data collection for the ADAM mobile manipulator. The proposed system incorporates an active weight compensation mechanism to bridge the physical discrepancies between the leader device and the robot, alongside an active safety system based on Signed Distance Fields that prevents self-collisions without restricting the operator's workspace. The framework has been evaluated in both simulated environments and on the real ADAM platform, demonstrating that inexperienced users can safely collect complex dual-arm demonstrations.
+                  To effectively execute long-horizon manipulation tasks in dynamic environments, robots must possess the capability to rapidly 
+                  adapt to novel and changing situations. Techniques such as Learning from Demonstration (LfD) enable intuitive skill acquisition 
+                  without the need for explicit coding. However, scaling these methods to extended, multi-step tasks exposes critical limitations, 
+                  as compounding errors constrain their ability to generalize to unforeseen Out-of-Distribution (OoD) scenarios. In this work, we 
+                  present a probabilistic framework that tackles this challenge by combining a kinematically-driven task decomposition approach with 
+                  movement primitive learning based on Gaussian Processes (GPs). To ensure robust execution across the entire task horizon, 
+                  the algorithm incorporates a zero-shot adaptation mechanism to new via-points without requiring retraining, through Pathwise 
+                  Conditioning. This approach is also capable of dynamically sequencing and adapting each subtask segmented on the fly, preserving 
+                  continuity and irregular executions between subtasks.
                 </p>
               </div>
               </div>
@@ -294,8 +302,13 @@
           <div class="columns is-centered">
             <div class="column is-full has-text-centered">
               <figure class="image">
-                <img src="static/images/GeneralScheme.png" alt="ADAPT General Scheme Workflow" style="max-width:100%; height:auto;" />
-                <figcaption class="is-size-7 mt-2">Figure 1. ADAPT overview: Teleoperation trajectories are validated via a digital twin and safeguarded in real time.</figcaption>
+                <img src="static/images/FullOverview.png" alt="Long Horizon Full Overview" style="max-width:100%; height:auto;" />
+                <figcaption class="is-size-7 mt-2">General overview. The proposed algorithm initializes by processing one or multiple long-horizon 
+                  demonstrations, which in this study are generated via kinesthetic teaching. These demonstrations undergo a Task Segmentation phase,
+                  yielding an initial segmentation based on heuristic kinematic estimations. To address the inherent over-segmentation of this step, 
+                  a probabilistic clustering approach is subsequently applied, relying on Gaussian Mixture Model (GMM) fusion through an 
+                  Expectation-Maximization (EM) algorithm. The extracted subtasks are then clustered into similar skills evaluated by the energy 
+                  cost required to transform one segment into another.Following this, each skill is modeled individually employing a Gaussian Process-based Learning from Demonstration (LfD) framework. During the learning of each subtask, the connection points between the preceding and succeeding subtasks are incorporated as initial via-points. The full long-horizon trajectory is then reconstructed by concatenating the learned subtasks and linking their respective connection points.Furthermore, the method is robust enough to optimize for Out-of-Distribution (OoD) scenarios. To achieve this, an adaptation based on Pathwise Conditioning has been developed, allowing for the integration of additional constraints via new via-points. This formulation enables the adaptation of the learned policies and the extension of tasks to novel points. Importantly, it preserves the seamless connectivity among subtasks by concurrently optimizing the transitions between them.</figcaption>
               </figure>
             </div>
           </div>
