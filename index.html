@@ -217,15 +217,13 @@
               <h1 class="title is-1 publication-title">Learn Once, Adapt Anytime: Unifying Explicit Segmentation and Pathwise Conditioning for Long-Horizon Manipulation</h1>
               <div class="is-size-5 publication-authors">
                 <span class="author-block">
-                  <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">Laura Pons</a><sup>*</sup>,</span>
+                  <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">Author 1</a>,</span>
                   <span class="author-block">
-                    <a href="https://scholar.google.es/citations?user=A7JOZNQAAAAJ&hl=es" target="_blank">Adrian Prados</a><sup>*</sup>,</span>
+                    <a href="" target="_blank">Author 2</a>,</span>
                     <span class="author-block">
-                      <a href="https://scholar.google.es/citations?user=31Qh_d4AAAAJ&hl=es&oi=ao" target="_blank">Alberto Mendez</a><sup>*</sup>,</span>
+                      <a href="" target="_blank">Author 3</a>,</span>
                     <span class="author-block">
-                      <a href="https://scholar.google.es/citations?user=iOFuxMIAAAAJ&hl=es&oi=ao" target="_blank">Gonzalo Espinoza</a></sup>,</span>
-                    <span class="author-block">
-                      <a href="https://scholar.google.es/citations?user=zVLybhsAAAAJ&hl=es&oi=ao" target="_blank">Ramon Barber</a>
+                      <a href="" target="_blank">Author 4</a></sup>,</span>
                     </span>
                     </div>
 
@@ -315,32 +313,34 @@
       
           <div class="content mt-5">
             <p>
-              <strong>ADAPT</strong> (<em>ADAM Dual-Arm Platform for Teleoperation</em>) is a comprehensive hardware and software framework designed to democratize and secure the collection of high-quality dual-arm data through <strong>Learning from Demonstration (LfD)</strong>. 
+              <strong>Proposed Framework</strong> is a probabilistic architecture designed for the robust execution of long-horizon manipulation tasks in dynamic environments[cite: 1]. 
             </p>
             <p>
-              Based on the low-cost philosophy of <strong>GELLO</strong>, our method solves the three major challenges of dual-arm teleoperation: prohibitive costs, operator fatigue, and the constant risk of self-collisions. The workflow is divided into three real-time interconnected pillars:
+              To tackle the critical limitations of compounding errors and Out-of-Distribution (OoD) scenarios, our method combines a kinematically-driven task decomposition approach with movement primitive learning based on Gaussian Processes (GPs)[cite: 1]. The workflow operates in three primary phases:
             </p>
-      
-            <h3 class="title is-4">1. Dual-Arm Leader Device (Capture & Interface)</h3>
+          
+            <h3 class="title is-4">1. Task Segmentation and Movement Libraries Generation</h3>
             <ul>
-              <li><strong>Low-Cost Kinematic Replica:</strong> The operator interacts with 3D-printed master arms, specifically customized and adapted to the kinematics of the robot's UR3 arms.</li>
-              <li><strong>Active Weight Compensation:</strong> The device features a dynamic smart clutch mechanism that counteracts the physical discrepancies between the leader and the follower, eliminating user fatigue and ensuring kinematic fidelity.</li>
+              <li><strong>Kinematic Heuristic Segmentation:</strong> Complex demonstrations are autonomously decomposed into discrete subtasks by evaluating abrupt changes in acceleration and jerk (smoothness) against a dynamic threshold $\theta$[cite: 1].</li>
+              <li><strong>Probabilistic Fusion:</strong> To counteract redundant fragmentation, initial heuristic cut points initialize a Gaussian Mixture Model (GMM), iteratively merging contiguous points based on highly overlapping probability distributions[cite: 1].</li>
+              <li><strong>Energy-Based Clustering:</strong> Segments are grouped into reusable skill libraries based on their spatial similarity, which is measured by the Gaussian Optimal Transport (GOT) energy cost required to transform one encoded GP into another[cite: 1].</li>
             </ul>
-      
-            <h3 class="title is-4">2. ADAMSim (The Digital Twin & Safety Core)</h3>
+          
+            <h3 class="title is-4">2. Learning of Subtasks via Gaussian Processes (GPs)</h3>
             <ul>
-              <li><strong>Sim-to-Real Bridge:</strong> Before reaching the physical environment, raw movement commands are processed by our custom simulation environment.</li>
-              <li><strong>Active Safety via SDF:</strong> We implement an algorithm based on <strong>Signed Distance Fields (SDFs)</strong> that evaluates joint states in real-time. If it detects a collision risk, it generates a virtual haptic repulsion force that halts the dangerous movement without restricting the operator's unconstrained workspace.</li>
+              <li><strong>Heteroscedastic Kernel Generation:</strong> Encapsulates each primitive using a GP that modulates a base squared-exponential kernel with local variance estimates, efficiently modeling the human execution's spatial dispersion[cite: 1].</li>
+              <li><strong>Direct Via-Point Embedding:</strong> Constraints like exact routing through targets are directly embedded into the training framework[cite: 1]. By constructing an augmented space of subtask data $D_i$ and noiseless via-points $\bar{D}_i$, the GP guarantees the generation of robust trajectories that perfectly intersect the specified constraints[cite: 1].</li>
             </ul>
-      
-            <h3 class="title is-4">3. ADAM (Physical Follower - Safe Execution)</h3>
+          
+            <h3 class="title is-4">3. Subtask Adaptation via Pathwise Conditioning</h3>
             <ul>
-              <li><strong>Validated Trajectories:</strong> The physical robot receives exclusively commands that are strictly verified and completely collision-free.</li>
-              <li><strong>Risk-Free Demonstrations:</strong> Thanks to this real-time filtering, even operators with no prior experience can perform complex coordinated tasks and record massive datasets without the danger of causing catastrophic hardware damage.</li>
+              <li><strong>Zero-Shot Adaptation:</strong> Real-time Pathwise Conditioning adapts the learned GPs to new spatial constraints or OoD object configurations without retraining or requiring additional demonstrations[cite: 1].</li>
+              <li><strong>Matheron's Update Rule:</strong> By shifting from sampling after conditioning to applying a deterministic update directly onto a prior trajectory, the algorithm bypasses heavy computational bottlenecks[cite: 1]. If the environment dictates modified via-points $\tilde{q}_i$ at times $\tilde{t}$, the updated trajectory $h_i^{post}$ is constructed instantaneously: <br><br>
+              $$h_i^{post}(t; \omega)=h_i^{prior}(t; \omega)+K_i(t,\tilde{t})K'_i(\tilde{t},\tilde{t})^{-1}(\tilde{q}_i-h_i^{prior}(\tilde{t}; \omega))$$[cite: 1]</li>
             </ul>
-      
+          
             <blockquote>
-              <strong>In short:</strong> ADAPT acts as a smart teleoperation shield. It translates the user's natural movements, validates them in a digital twin using SDF to prevent self-collisions, and executes 100% safe trajectories on the real robot.
+              <strong>In short:</strong> The framework automatically segments continuous human demonstrations into reusable kinematic subtasks, encapsulates them as Gaussian Processes, and utilizes Pathwise Conditioning to instantly adapt trajectories to Out-of-Distribution environments while maintaining continuous subtask connectivity[cite: 1].
             </blockquote>
           </div>
         </div>
@@ -348,7 +348,7 @@
 
       <section class="section planner-plots-section">
         <div class="container is-max-desktop">
-          <h2 class="title is-2 has-text-centered">Videos Demonstrations for Manipulation Tasks</h2>
+          <h2 class="title is-2 has-text-centered">Real World Long-Horizon Manipulation Tasks</h2>
           <p class="has-text-centered planner-plots-note">
             To evaluate the ADAPT framework, the experimental setup encompassed a diverse spectrum of dual-arm coordination paradigms. 
             Tasks were designed to exploit true dual-arm synergy, solving operations that are impossible or inefficient for a single arm. 
