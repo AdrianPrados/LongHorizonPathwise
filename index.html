@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+      svg: { fontCache: 'global' }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script
+    >
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="title" content="ADAPT: A Safe Dual-Arm Teleoperation Framework for Data Collection on ADAM">
+  <meta name="description" content="Dual-arm teleoperation system for ADAM robot.">
+  <meta name="keywords" content="Teleoperation, Dual-Arm manipulation, Learning from Demonstration">
+  <meta name="author" content="Laura Pons, Adrian Prados, Alberto Mendez, Gonzalo Espinoza, Ramon Barber">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="INSTITUTION_OR_LAB_NAME">
+  <meta property="og:title" content="PAPER_TITLE">
+  <meta property="og:description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
+  <meta property="og:url" content="https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE">
+  <meta property="og:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="PAPER_TITLE - Research Preview">
+  <meta property="article:published_time" content="2024-01-01T00:00:00.000Z">
+  <meta property="article:author" content="FIRST_AUTHOR_NAME">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="KEYWORD1">
+  <meta property="article:tag" content="KEYWORD2">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@YOUR_TWITTER_HANDLE">
+  <meta name="twitter:creator" content="@AUTHOR_TWITTER_HANDLE">
+  <meta name="twitter:title" content="PAPER_TITLE">
+  <meta name="twitter:description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
+  <meta name="twitter:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
+  <meta name="twitter:image:alt" content="PAPER_TITLE - Research Preview">
+
+  <meta name="citation_title" content="PAPER_TITLE">
+  <meta name="citation_author" content="FIRST_AUTHOR_LAST, FIRST_AUTHOR_FIRST">
+  <meta name="citation_author" content="SECOND_AUTHOR_LAST, SECOND_AUTHOR_FIRST">
+  <meta name="citation_publication_date" content="2024">
+  <meta name="citation_conference_title" content="CONFERENCE_NAME">
+  <meta name="citation_pdf_url" content="https://YOUR_DOMAIN.com/static/pdfs/paper.pdf">
+  
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+
+  <title>ADAPT: A Safe Dual-Arm Teleoperation Framework for Data Collection on ADAM</title>
+  
+  <link rel="icon" type="image/x-icon" href="static/images/LogoADAMSim.ico">
+  <link rel="apple-touch-icon" href="static/images/LogoADAMSim.ico">
+  
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <noscript>
+    
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "PAPER_TITLE",
+    "description": "BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS",
+    "author": [
+      {
+        "@type": "Person",
+        "name": "FIRST_AUTHOR_NAME",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "INSTITUTION_NAME"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "SECOND_AUTHOR_NAME",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "INSTITUTION_NAME"
+        }
+      }
+    ],
+    "datePublished": "2024-01-01",
+    "publisher": {
+      "@type": "Organization",
+      "name": "CONFERENCE_OR_JOURNAL_NAME"
+    },
+    "url": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE",
+    "image": "https://YOUR_DOMAIN.com/static/images/social_preview.png",
+    "keywords": ["KEYWORD1", "KEYWORD2", "KEYWORD3", "machine learning", "computer vision"],
+    "abstract": "FULL_ABSTRACT_TEXT_HERE",
+    
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "mainEntity": {
+      "@type": "WebPage",
+      "@id": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE"
+    },
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "RESEARCH_AREA_1"
+      },
+      {
+        "@type": "Thing", 
+        "name": "RESEARCH_AREA_2"
+      }
+    ]
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "INSTITUTION_OR_LAB_NAME",
+    "url": "https://YOUR_INSTITUTION_WEBSITE.com",
+    "logo": "https://YOUR_DOMAIN.com/static/images/LogoADAMSim.ico",
+    "sameAs": [
+      "https://twitter.com/YOUR_TWITTER_HANDLE",
+      "https://github.com/YOUR_GITHUB_USERNAME"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <div class="more-works-container">
+    <button class="more-works-btn" onclick="toggleMoreWorks()" title="View More Works from Our Lab">
+      <i class="fas fa-flask"></i>
+      More Works
+      <i class="fas fa-chevron-down dropdown-arrow"></i>
+    </button>
+    <div class="more-works-dropdown" id="moreWorksDropdown">
+      <div class="dropdown-header">
+        <h4>More Works from Our Lab</h4>
+        <button class="close-btn" onclick="toggleMoreWorks()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="works-list">
+        <a href="https://arxiv.org/abs/PAPER_ID_1" class="work-item" target="_blank">
+          <div class="work-info">
+            <h5>Paper Title 1</h5>
+            <p>Brief description of the work and its main contribution.</p>
+            <span class="work-venue">Conference/Journal 2024</span>
+          </div>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+        <a href="https://arxiv.org/abs/PAPER_ID_2" class="work-item" target="_blank">
+          <div class="work-info">
+            <h5>Paper Title 2</h5>
+            <p>Brief description of the work and its main contribution.</p>
+            <span class="work-venue">Conference/Journal 2023</span>
+          </div>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+        <a href="https://arxiv.org/abs/PAPER_ID_3" class="work-item" target="_blank">
+          <div class="work-info">
+            <h5>Paper Title 3</h5>
+            <p>Brief description of the work and its main contribution.</p>
+            <span class="work-venue">Conference/Journal 2023</span>
+          </div>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+  <main id="main-content">
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <h1 class="title is-1 publication-title">ADAPT: A Safe Dual-Arm Teleoperation Framework for Data Collection on ADAM</h1>
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">
+                  <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">Laura Pons</a><sup>*</sup>,</span>
+                  <span class="author-block">
+                    <a href="https://scholar.google.es/citations?user=A7JOZNQAAAAJ&hl=es" target="_blank">Adrian Prados</a><sup>*</sup>,</span>
+                    <span class="author-block">
+                      <a href="https://scholar.google.es/citations?user=31Qh_d4AAAAJ&hl=es&oi=ao" target="_blank">Alberto Mendez</a><sup>*</sup>,</span>
+                    <span class="author-block">
+                      <a href="https://scholar.google.es/citations?user=iOFuxMIAAAAJ&hl=es&oi=ao" target="_blank">Gonzalo Espinoza</a></sup>,</span>
+                    <span class="author-block">
+                      <a href="https://scholar.google.es/citations?user=zVLybhsAAAAJ&hl=es&oi=ao" target="_blank">Ramon Barber</a>
+                    </span>
+                    </div>
+
+                    <div class="is-size-5 publication-authors">
+                      <span class="author-block">Mobile Robots Group, RoboticsLab, University Carlos III<br>ROBOT 2026</span>
+                      <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+                    </div>
+
+                    <div class="column has-text-centered">
+                      <div class="publication-links">
+                           <span class="link-block">
+                          <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
+                          class="external-link button is-normal is-rounded is-dark">
+                          <span class="icon">
+                            <i class="fas fa-file-pdf"></i>
+                          </span>
+                          <span>Paper</span>
+                        </a>
+                      </span>
+
+                      <span class="link-block">
+                      <a href="https://github.com/Mobile-Robots-Group-UC3M/adapt" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fab fa-github"></i>
+                      </span>
+                      <span>Code</span>
+                    </a>
+                  </span>
+
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <img src="static/images/IntroPaper.jpg" alt="Abstract illustration" style="max-width: 100%; height: auto; margin-top: 2rem; margin-bottom: 2rem;" />
+          </div>
+        </div>
+      </div>
+      <section class="section hero is-light">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3">Abstract</h2>
+              <div class="content has-text-justified">
+                <p>
+                  To successfully train robotic systems through Learning from Demonstrations, large and high-quality datasets of human demonstrations are normally required. However, dual-arm data collection is severely bottlenecked by prohibitive hardware costs, complex dual-arm coordination, and a persistent risk of self-collisions, which restricts the deployment of these platforms. In this work, we present ADAPT (ADAM Dual-Arm Platform for Teleoperation), a comprehensive hardware and software framework based on GELLO that enables safe, intuitive, and low-cost data collection for the ADAM mobile manipulator. The proposed system incorporates an active weight compensation mechanism to bridge the physical discrepancies between the leader device and the robot, alongside an active safety system based on Signed Distance Fields that prevents self-collisions without restricting the operator's workspace. The framework has been evaluated in both simulated environments and on the real ADAM platform, demonstrating that inexperienced users can safely collect complex dual-arm demonstrations.
+                </p>
+              </div>
+              </div>
+          </div>
+        </div>
+      </section>
+
+
+
+    <section class="section">
+        <div class="container is-max-desktop">
+          <h2 class="title is-2 has-text-centered">General Overview of the Method</h2>
+          
+          <div class="columns is-centered">
+            <div class="column is-full has-text-centered">
+              <figure class="image">
+                <img src="static/images/GeneralScheme.png" alt="ADAPT General Scheme Workflow" style="max-width:100%; height:auto;" />
+                <figcaption class="is-size-7 mt-2">Figure 1. ADAPT overview: Teleoperation trajectories are validated via a digital twin and safeguarded in real time.</figcaption>
+              </figure>
+            </div>
+          </div>
+      
+          <div class="content mt-5">
+            <p>
+              <strong>ADAPT</strong> (<em>ADAM Dual-Arm Platform for Teleoperation</em>) is a comprehensive hardware and software framework designed to democratize and secure the collection of high-quality dual-arm data through <strong>Learning from Demonstration (LfD)</strong>. 
+            </p>
+            <p>
+              Based on the low-cost philosophy of <strong>GELLO</strong>, our method solves the three major challenges of dual-arm teleoperation: prohibitive costs, operator fatigue, and the constant risk of self-collisions. The workflow is divided into three real-time interconnected pillars:
+            </p>
+      
+            <h3 class="title is-4">1. Dual-Arm Leader Device (Capture & Interface)</h3>
+            <ul>
+              <li><strong>Low-Cost Kinematic Replica:</strong> The operator interacts with 3D-printed master arms, specifically customized and adapted to the kinematics of the robot's UR3 arms.</li>
+              <li><strong>Active Weight Compensation:</strong> The device features a dynamic smart clutch mechanism that counteracts the physical discrepancies between the leader and the follower, eliminating user fatigue and ensuring kinematic fidelity.</li>
+            </ul>
+      
+            <h3 class="title is-4">2. ADAMSim (The Digital Twin & Safety Core)</h3>
+            <ul>
+              <li><strong>Sim-to-Real Bridge:</strong> Before reaching the physical environment, raw movement commands are processed by our custom simulation environment.</li>
+              <li><strong>Active Safety via SDF:</strong> We implement an algorithm based on <strong>Signed Distance Fields (SDFs)</strong> that evaluates joint states in real-time. If it detects a collision risk, it generates a virtual haptic repulsion force that halts the dangerous movement without restricting the operator's unconstrained workspace.</li>
+            </ul>
+      
+            <h3 class="title is-4">3. ADAM (Physical Follower - Safe Execution)</h3>
+            <ul>
+              <li><strong>Validated Trajectories:</strong> The physical robot receives exclusively commands that are strictly verified and completely collision-free.</li>
+              <li><strong>Risk-Free Demonstrations:</strong> Thanks to this real-time filtering, even operators with no prior experience can perform complex coordinated tasks and record massive datasets without the danger of causing catastrophic hardware damage.</li>
+            </ul>
+      
+            <blockquote>
+              <strong>In short:</strong> ADAPT acts as a smart teleoperation shield. It translates the user's natural movements, validates them in a digital twin using SDF to prevent self-collisions, and executes 100% safe trajectories on the real robot.
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <section class="section planner-plots-section">
+        <div class="container is-max-desktop">
+          <h2 class="title is-2 has-text-centered">Videos Demonstrations for Manipulation Tasks</h2>
+          <p class="has-text-centered planner-plots-note">
+            To evaluate the ADAPT framework, the experimental setup encompassed a diverse spectrum of dual-arm coordination paradigms. 
+            Tasks were designed to exploit true dual-arm synergy, solving operations that are impossible or inefficient for a single arm. 
+            The evaluation scenarios fall into 4 categories:
+          </p>
+
+          <div class="columns is-multiline planner-study-grid">
+            <div class="column is-one-quarter">
+              <article class="planner-study-card">
+                <h3 class="title is-5">1) Independent Simultaneous Tasks</h3>
+                <p>
+                  A concurrent pick-and-place scenario where each arm independently relocates separate items. 
+                  This demonstrates spatial synergy, relying on the system's collision avoidance to maximize productivity in a shared workspace.
+                </p>
+              </article>
+            </div>
+            <div class="column is-one-quarter">
+              <article class="planner-study-card">
+                <h3 class="title is-5">2) Dual-Arm Coordination and Support-Action</h3>
+                <p>
+                  Involving handover and liquid pouring tasks. These represent a leader-follower dynamic where one arm provides stability (e.g., holding a glass)
+                  while the other executes a precision action (e.g., pouring).
+                </p>
+                
+              </article>
+            </div>
+            <div class="column is-one-quarter">
+              <article class="planner-study-card">
+                <h3 class="title is-5">3) Coupled Coordinated Manipulation</h3>
+                <p>
+                  Transporting large, rigid objects like bulky boxes. This requires synchronous control over a single payload, ensuring both manipulators maintain precise trajectory coordination 
+                  to prevent dropping the object or inducing mechanical strain.
+                </p>
+                
+              </article>
+            </div>
+            <div class="column is-one-quarter">
+              <article class="planner-study-card">
+                <h3 class="title is-5">4) Deformable Object Manipulation</h3>
+                <p>
+                  Handling flexible materials like cables and textiles. These objects deform under gravity and require simultaneous dual-point tension control, 
+                  highlighting a core advantage of dual-arm teleoperation.
+                </p>
+                
+              </article>
+            </div>
+          </div>
+
+          <div class="planner-experiment-controls columns is-centered mt-4">
+            <div class="column is-narrow">
+              <div class="field">
+                <label class="label" for="video-task-select">Dual-Arm Task</label>
+                <div class="control">
+                  <div class="select">
+                    <select id="video-task-select">
+                      <option value="" disabled selected>Select a Task...</option>
+                      <option value="Pick_and_Place">Pick and Place</option>
+                      <option value="Pouring_Water">Pouring Water</option>
+                      <option value="Box">Box Manipulation</option>
+                      <option value="bimanual">Bimanual Task</option>
+                      <option value="Handover">Handover Sphere</option>
+                      <option value="Deformable">Dual-Arm Hoodie</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-narrow">
+              <div class="field">
+                <label class="label" for="video-user-select">User</label>
+                <div class="control">
+                  <div class="select">
+                    <select id="video-user-select">
+                      <option value="" disabled selected>Select User...</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="planner-experiment-summary" class="has-text-centered mt-2 mb-4" role="status" aria-live="polite">
+            <p id="summary-text" class="is-italic has-text-grey">Select a task and a user to load the demonstration video.</p>
+          </div>
+
+          <div class="columns is-centered">
+            <div class="column is-eight-fifths has-text-centered">
+              <video id="experiment-video" class="is-hidden" width="100%" controls muted autoplay style="border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <source id="video-source" src="" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+
+          </div>
+      </section>
+
+      <!-- NEW SECTION: Signed Distance Fields -->
+    <section class="section" id="sdf-safety">
+      <div class="container is-max-desktop">
+        <h2 class="title is-2 has-text-centered">Signed Distance Fields (SDF) for Active Safety</h2>
+        
+        <div class="content mt-5 has-text-justified">
+          <p>
+            The ADAPT framework incorporates an active safety system based on Signed Distance Fields (SDFs) to prevent self-collisions without restricting the operator's workspace.
+            By evaluating the robot's joint states in real-time within the digital twin, the SDF algorithm provides haptic repulsion that halts dangerous movements, guaranteeing risk-free data collection during unconstrained dual-arm teleoperation.
+          </p>
+        </div>
+
+        <div class="columns is-vcentered is-centered mt-5">
+          <!-- Image Column -->
+          <div class="column is-half has-text-centered">
+            <figure class="image">
+              <!-- Adjust the src path to match your actual SDF image -->
+              <img src="static/images/SDFADAM.png" alt="SDF Visualization in Digital Twin" style="border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 100%; height: auto;" />
+              <figcaption class="is-size-7 mt-2">SDF calcualted for ADAM. (a) 2D SDF cross-section in the YZ plane. The heatmap indicates spatial distances, from the robot's surface (red, 0.00m) 
+                to free space (green), with contour lines marking specific proximity margins (0.02m to 0.08m), (b) Simulation of the robot interacting with objects on a 
+                table. An interactive point cloud on the arms evaluates collision risks: blue points indicate safe zones, while orange points highlight areas breaching 
+                the safety threshold near an object.</figcaption>
+            </figure>
+          </div>
+          
+          <!-- Video Column -->
+          <div class="column is-half has-text-centered">
+            <!-- Adjust the src path to match your actual SDF video -->
+            <video width="100%" controls muted autoplay loop style="border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+              <source src="static/videos/SDF_comprimido.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p class="is-size-7 mt-2">Real-time haptic repulsion preventing dual-arm self-collision and object collision. 
+              When the SDF detects the collision, the system blocks the arm to avoid real collision.</p>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+    <!-- END NEW SECTION -->
+
+    <!-- NEW SECTION: Simulated environments for data acquisition -->
+    <section class="section" id="sdf-safety">
+      <div class="container is-max-desktop">
+        <h2 class="title is-2 has-text-centered">Simulated environments for data acquisition</h2>
+        
+        <div class="content mt-5 has-text-justified">
+          <p>
+            The ADAPT framework leverages high-fidelity simulated environments (based on ADAMSim) to streamline the data acquisition process for Imitation Learning. 
+            By utilizing a digital twin of the dual-arm setup, operators can perform complex teleoperation tasks in a safe and controlled virtual space. 
+            This approach not only prevents physical wear and accidental collisions during the initial stages of data collection, but also enables 
+            rapid iteration and the generation of diverse datasets across varied scenarios, ensuring robust policy training before real-world deployment.
+          </p>
+        </div>
+
+        <div class="columns is-vcentered is-centered mt-5">
+          
+          <!-- Video Column  -->
+          <div class="column is-half has-text-centered">
+            <!-- Adjust the src path to match your actual SDF video -->
+            <video width="100%" controls muted autoplay loop style="border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+              <source src="static/videos/demo-simulacion.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p class="is-size-7 mt-2">Teleoperation of the dual-arm system within the digital twin. The virtual environment replicates the physical kinematics and dynamics, 
+              allowing the operator to safely collect manipulation data without hardware risks.</p>
+          </div>
+
+          <!-- Image Column  -->
+          <div class="column is-half has-text-centered">
+            <figure class="image">
+              <!-- Adjust the src path to match your actual SDF image -->
+              <img src="static/images/VisionExample.png" alt="SDF Visualization in Digital Twin" style="border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 100%; height: auto;" />
+              <figcaption class="is-size-7 mt-2">The virtual workspace where objects and environmental constraints are accurately modeled. This digital twin serves as the primary 
+                platform for capturing high-quality human demonstrations and validating control policies prior to physical execution.</figcaption>
+            </figure>
+          </div>
+          
+        </div>
+        
+      </div>
+    </section>
+    <!-- END NEW SECTION -->
+
+
+
+      <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+  </html>
