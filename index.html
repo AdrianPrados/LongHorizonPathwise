@@ -313,34 +313,34 @@
       
           <div class="content mt-5">
             <p>
-              <strong>Proposed Framework</strong> is a probabilistic architecture designed for the robust execution of long-horizon manipulation tasks in dynamic environments[cite: 1]. 
+              <strong>Proposed Framework</strong> is a probabilistic architecture designed for the robust execution of long-horizon manipulation tasks in dynamic environments. 
             </p>
             <p>
-              To tackle the critical limitations of compounding errors and Out-of-Distribution (OoD) scenarios, our method combines a kinematically-driven task decomposition approach with movement primitive learning based on Gaussian Processes (GPs)[cite: 1]. The workflow operates in three primary phases:
+              To tackle the critical limitations of compounding errors and Out-of-Distribution (OoD) scenarios, our method combines a kinematically-driven task decomposition approach with movement primitive learning based on Gaussian Processes (GPs). The workflow operates in three primary phases:
             </p>
           
             <h3 class="title is-4">1. Task Segmentation and Movement Libraries Generation</h3>
             <ul>
-              <li><strong>Kinematic Heuristic Segmentation:</strong> Complex demonstrations are autonomously decomposed into discrete subtasks by evaluating abrupt changes in acceleration and jerk (smoothness) against a dynamic threshold $\theta$[cite: 1].</li>
-              <li><strong>Probabilistic Fusion:</strong> To counteract redundant fragmentation, initial heuristic cut points initialize a Gaussian Mixture Model (GMM), iteratively merging contiguous points based on highly overlapping probability distributions[cite: 1].</li>
-              <li><strong>Energy-Based Clustering:</strong> Segments are grouped into reusable skill libraries based on their spatial similarity, which is measured by the Gaussian Optimal Transport (GOT) energy cost required to transform one encoded GP into another[cite: 1].</li>
+              <li><strong>Kinematic Heuristic Segmentation:</strong> Complex demonstrations are autonomously decomposed into discrete subtasks by evaluating abrupt changes in acceleration and jerk (smoothness) against a dynamic threshold $\theta$.</li>
+              <li><strong>Probabilistic Fusion:</strong> To counteract redundant fragmentation, initial heuristic cut points initialize a Gaussian Mixture Model (GMM), iteratively merging contiguous points based on highly overlapping probability distributions.</li>
+              <li><strong>Energy-Based Clustering:</strong> Segments are grouped into reusable skill libraries based on their spatial similarity, which is measured by the Gaussian Optimal Transport (GOT) energy cost required to transform one encoded GP into another.</li>
             </ul>
           
             <h3 class="title is-4">2. Learning of Subtasks via Gaussian Processes (GPs)</h3>
             <ul>
-              <li><strong>Heteroscedastic Kernel Generation:</strong> Encapsulates each primitive using a GP that modulates a base squared-exponential kernel with local variance estimates, efficiently modeling the human execution's spatial dispersion[cite: 1].</li>
-              <li><strong>Direct Via-Point Embedding:</strong> Constraints like exact routing through targets are directly embedded into the training framework[cite: 1]. By constructing an augmented space of subtask data $D_i$ and noiseless via-points $\bar{D}_i$, the GP guarantees the generation of robust trajectories that perfectly intersect the specified constraints[cite: 1].</li>
+              <li><strong>Heteroscedastic Kernel Generation:</strong> Encapsulates each primitive using a GP that modulates a base squared-exponential kernel with local variance estimates, efficiently modeling the human execution's spatial dispersion.</li>
+              <li><strong>Direct Via-Point Embedding:</strong> Constraints like exact routing through targets are directly embedded into the training framework. By constructing an augmented space of subtask data $D_i$ and noiseless via-points $\bar{D}_i$, the GP guarantees the generation of robust trajectories that perfectly intersect the specified constraints.</li>
             </ul>
           
             <h3 class="title is-4">3. Subtask Adaptation via Pathwise Conditioning</h3>
             <ul>
-              <li><strong>Zero-Shot Adaptation:</strong> Real-time Pathwise Conditioning adapts the learned GPs to new spatial constraints or OoD object configurations without retraining or requiring additional demonstrations[cite: 1].</li>
-              <li><strong>Matheron's Update Rule:</strong> By shifting from sampling after conditioning to applying a deterministic update directly onto a prior trajectory, the algorithm bypasses heavy computational bottlenecks[cite: 1]. If the environment dictates modified via-points $\tilde{q}_i$ at times $\tilde{t}$, the updated trajectory $h_i^{post}$ is constructed instantaneously: <br><br>
-              $$h_i^{post}(t; \omega)=h_i^{prior}(t; \omega)+K_i(t,\tilde{t})K'_i(\tilde{t},\tilde{t})^{-1}(\tilde{q}_i-h_i^{prior}(\tilde{t}; \omega))$$[cite: 1]</li>
+              <li><strong>Zero-Shot Adaptation:</strong> Real-time Pathwise Conditioning adapts the learned GPs to new spatial constraints or OoD object configurations without retraining or requiring additional demonstrations.</li>
+              <li><strong>Matheron's Update Rule:</strong> By shifting from sampling after conditioning to applying a deterministic update directly onto a prior trajectory, the algorithm bypasses heavy computational bottlenecks. If the environment dictates modified via-points $\tilde{q}_i$ at times $\tilde{t}$, the updated trajectory $h_i^{post}$ is constructed instantaneously: <br><br>
+              $$h_i^{post}(t; \omega)=h_i^{prior}(t; \omega)+K_i(t,\tilde{t})K'_i(\tilde{t},\tilde{t})^{-1}(\tilde{q}_i-h_i^{prior}(\tilde{t}; \omega))$$</li>
             </ul>
           
             <blockquote>
-              <strong>In short:</strong> The framework automatically segments continuous human demonstrations into reusable kinematic subtasks, encapsulates them as Gaussian Processes, and utilizes Pathwise Conditioning to instantly adapt trajectories to Out-of-Distribution environments while maintaining continuous subtask connectivity[cite: 1].
+              <strong>In short:</strong> The framework automatically segments continuous human demonstrations into reusable kinematic subtasks, encapsulates them as Gaussian Processes, and utilizes Pathwise Conditioning to instantly adapt trajectories to Out-of-Distribution environments while maintaining continuous subtask connectivity.
             </blockquote>
           </div>
         </div>
@@ -350,47 +350,47 @@
         <div class="container is-max-desktop">
           <h2 class="title is-2 has-text-centered">Real World Long-Horizon Manipulation Tasks</h2>
           <p class="has-text-centered planner-plots-note">
-            To evaluate the ADAPT framework, the experimental setup encompassed a diverse spectrum of dual-arm coordination paradigms. 
-            Tasks were designed to exploit true dual-arm synergy, solving operations that are impossible or inefficient for a single arm. 
-            The evaluation scenarios fall into 4 categories:
+            To validate the proposed method, we conducted 4 real-world experiments using a mobile manipulator robot. 
+            For each task, a single long-horizon demonstration was used to decompose and learn the respective motion libraries. 
+            QR-based visual detectors tracked object poses in real-time, allowing the system to seamlessly adapt to static Out-of-Distribution (OoD) setups and dynamic environmental changes on the fly. The evaluation scenarios are:
           </p>
 
           <div class="columns is-multiline planner-study-grid">
             <div class="column is-one-quarter">
               <article class="planner-study-card">
-                <h3 class="title is-5">1) Independent Simultaneous Tasks</h3>
+                <h3 class="title is-5">1) Preparing a Capsule Coffee</h3>
                 <p>
-                  A concurrent pick-and-place scenario where each arm independently relocates separate items. 
-                  This demonstrates spatial synergy, relying on the system's collision avoidance to maximize productivity in a shared workspace.
+                  A complex sequential manipulation task requiring the robot to interact with a coffee maker, capsule, and mug. 
+                  This task highlights the framework's ability to chain multiple precise subtasks together and seamlessly adapt to spatial variations in the object placements.
                 </p>
               </article>
             </div>
             <div class="column is-one-quarter">
               <article class="planner-study-card">
-                <h3 class="title is-5">2) Dual-Arm Coordination and Support-Action</h3>
+                <h3 class="title is-5">2) Sorting Objects into Boxes</h3>
                 <p>
-                  Involving handover and liquid pouring tasks. These represent a leader-follower dynamic where one arm provides stability (e.g., holding a glass)
-                  while the other executes a precision action (e.g., pouring).
-                </p>
-                
-              </article>
-            </div>
-            <div class="column is-one-quarter">
-              <article class="planner-study-card">
-                <h3 class="title is-5">3) Coupled Coordinated Manipulation</h3>
-                <p>
-                  Transporting large, rigid objects like bulky boxes. This requires synchronous control over a single payload, ensuring both manipulators maintain precise trajectory coordination 
-                  to prevent dropping the object or inducing mechanical strain.
+                  A scenario focused on sorting small and large objects into designated boxes. 
+                  It demonstrates the system's capacity to handle multi-stage pick-and-place operations and successfully adapt to dynamic shifts in target container locations without requiring retraining.
                 </p>
                 
               </article>
             </div>
             <div class="column is-one-quarter">
               <article class="planner-study-card">
-                <h3 class="title is-5">4) Deformable Object Manipulation</h3>
+                <h3 class="title is-5">3) Rearranging Cans on a Shelf</h3>
                 <p>
-                  Handling flexible materials like cables and textiles. These objects deform under gravity and require simultaneous dual-point tension control, 
-                  highlighting a core advantage of dual-arm teleoperation.
+                  An organizational task where the manipulator must move items to distinct levels of a shelf. 
+                  This evaluates the robot's zero-shot spatial adaptability when handling constrained environments and adjusting interconnected via-points across a wide workspace.
+                </p>
+                
+              </article>
+            </div>
+            <div class="column is-one-quarter">
+              <article class="planner-study-card">
+                <h3 class="title is-5">4) Wiping a Table</h3>
+                <p>
+                  A continuous, non pick-and-place manipulation task. 
+                  This demonstrates the framework's versatility, proving that Pathwise Conditioning can preserve the shape, intent, and fluidity of human-demonstrated sweeping motions even when the target workspace constraints are altered.
                 </p>
                 
               </article>
