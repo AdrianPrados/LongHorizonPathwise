@@ -760,19 +760,27 @@ function setupSimulatedVideoPlayer() {
 
     if (!envSelect || !taskSelect || !testSelect || !videoElement) return;
 
-    // 1. AÑADIMOS 'numTests' a cada tarea para definir dinámicamente sus videos disponibles
+    // Solo definimos los prefijos de las rutas, ¡sin números ni cantidades!
     const tasksMap = {
         'Kitchen': [
-            // Pon aquí el número real de tests que tienes para Kitchen Task
-            { id: '1', name: 'Kitchen Task', numTests: 4 } 
+            { id: '1', name: 'Kitchen Task', prefix: 'static/videos/KitChenEdited/Kitchen_' }
         ],
         'Mesa': [
-            // Define dinámicamente cuántos vídeos tiene cada tarea de Mesa
-            { id: '1', name: 'Domestic Assistive', numTests: 3 }, 
-            { id: '2', name: 'Medical Waste Sorting', numTests: 5 }, 
-            { id: '3', name: 'Food and Beverage Packing', numTests: 2 } 
+            { id: '1', name: 'Domestic Assistive', prefix: 'static/videos/MesaEdited/Mesa_1_' },
+            { id: '2', name: 'Medical Waste Sorting', prefix: 'static/videos/MesaEdited/Mesa_2_' },
+            { id: '3', name: 'Food and Beverage Packing', prefix: 'static/videos/MesaEdited/Mesa_3_' }
         ]
     };
+
+    // Función que comprueba si un archivo existe en el servidor sin descargarlo
+    async function checkFileExists(url) {
+        try {
+            const response = await fetch(url, { method: 'HEAD' });
+            return response.ok;
+        } catch (e) {
+            return false;
+        }
+    }
 
     function resetVideoState() {
         videoElement.classList.add('is-hidden');
@@ -781,11 +789,12 @@ function setupSimulatedVideoPlayer() {
         summaryText.className = 'is-italic has-text-grey mt-2 mb-4';
     }
 
+    // 1. Selección de Entorno
     envSelect.addEventListener('change', function() {
         const selectedEnv = envSelect.value;
 
         taskSelect.innerHTML = '<option value="" disabled selected>Select Task...</option>';
-        testSelect.innerHTML = '<option value="" disabled selected>Select Test Environment...</option>';
+        testSelect.innerHTML = '<option value="" disabled selected>Select Scenario...</option>';
         testSelect.disabled = true;
 
         if (!selectedEnv) {
@@ -806,35 +815,56 @@ function setupSimulatedVideoPlayer() {
         resetVideoState();
     });
 
-    taskSelect.addEventListener('change', function() {
+    // 2. Selección de Tarea -> Búsqueda DINÁMICA de vídeos
+    taskSelect.addEventListener('change', async function() {
         const selectedTask = taskSelect.value;
         const selectedEnv = envSelect.value;
 
-        testSelect.innerHTML = '<option value="" disabled selected>Select Test Environment...</option>';
+        testSelect.innerHTML = '<option value="" disabled selected>Checking available videos...</option>';
+        testSelect.disabled = true;
+        resetVideoState();
 
-        if (!selectedTask) {
-            testSelect.disabled = true;
-            resetVideoState();
-            return;
-        }
+        if (!selectedTask) return;
 
-        // 2. RECUPERAMOS el número dinámico de tests buscando la tarea seleccionada en nuestro mapa
         const availableTasks = tasksMap[selectedEnv] || [];
         const taskObject = availableTasks.find(t => t.id === selectedTask);
-        const dynamicNumTests = taskObject ? taskObject.numTests : 0;
+        if (!taskObject) return;
 
-        // 3. CREAMOS las opciones de test basados en el número que acabamos de leer
-        for (let i = 1; i <= dynamicNumTests; i++) {
-            const option = document.createElement('option');
-            option.value = i.toString();
-            option.textContent = `Test Environment ${i}`;
-            testSelect.appendChild(option);
+        let index = 1;
+        const foundIndices = [];
+        const maxLimit = 20; // Límite de seguridad para evitar bucles infinitos
+
+        // Escanear dinámicamente hasta que un vídeo devuelva 404 (No encontrado)
+        while (index <= maxLimit) {
+            const videoUrl = `${taskObject.prefix}${index}.mp4`;
+            const exists = await checkFileExists(videoUrl);
+
+            if (exists) {
+                foundIndices.push(index);
+                index++;
+            } else {
+                // Al primer vídeo que no exista, detenemos la búsqueda
+                break;
+            }
         }
 
-        testSelect.disabled = false;
-        resetVideoState();
+        testSelect.innerHTML = '<option value="" disabled selected>Select Scenario...</option>';
+
+        if (foundIndices.length > 0) {
+            foundIndices.forEach(i => {
+                const option = document.createElement('option');
+                option.value = i.toString();
+                option.textContent = `Test Environment ${i}`;
+                testSelect.appendChild(option);
+            });
+            testSelect.disabled = false;
+        } else {
+            summaryText.innerHTML = "<strong>No videos found for this task! Check file names or paths.</strong>";
+            summaryText.className = 'has-text-danger mt-2 mb-4';
+        }
     });
 
+    // 3. Selección del Test Environment -> Carga el vídeo
     testSelect.addEventListener('change', function() {
         const selectedEnv = envSelect.value;
         const selectedTask = taskSelect.value;
@@ -842,12 +872,11 @@ function setupSimulatedVideoPlayer() {
 
         if (!selectedEnv || !selectedTask || !selectedTestEnv) return;
 
-        let videoPath = '';
-        if (selectedEnv === 'Kitchen') {
-            videoPath = `static/videos/KitChenEdited/Kitchen_${selectedTestEnv}.mp4`;
-        } else if (selectedEnv === 'Mesa') {
-            videoPath = `static/videos/MesaEdited/Mesa_${selectedTask}_${selectedTestEnv}.mp4`;
-        }
+        const availableTasks = tasksMap[selectedEnv] || [];
+        const taskObject = availableTasks.find(t => t.id === selectedTask);
+        if (!taskObject) return;
+
+        const videoPath = `${taskObject.prefix}${selectedTestEnv}.mp4`;
 
         videoElement.classList.remove('is-hidden');
         videoSource.src = videoPath;
