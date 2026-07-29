@@ -323,19 +323,23 @@
             </p>
           
             <h3 class="title is-4">1. Task Segmentation and Movement Libraries Generation</h3>
+            <img src="static/images/Segmentation.png" alt="Task Segmentation" style="max-width: 100%; height: auto; margin-bottom: 1rem; border-radius: 8px;">
             <ul>
               <li><strong>Kinematic Heuristic Segmentation:</strong> Complex demonstrations are autonomously decomposed into discrete subtasks by evaluating abrupt changes in acceleration and jerk (smoothness) against a dynamic threshold $\theta$.</li>
               <li><strong>Probabilistic Fusion:</strong> To counteract redundant fragmentation, initial heuristic cut points initialize a Gaussian Mixture Model (GMM), iteratively merging contiguous points based on highly overlapping probability distributions.</li>
               <li><strong>Energy-Based Clustering:</strong> Segments are grouped into reusable skill libraries based on their spatial similarity, which is measured by the Gaussian Optimal Transport (GOT) energy cost required to transform one encoded GP into another.</li>
             </ul>
+            <img src="static/images/Library.png" alt="Library Skills" style="max-width: 100%; height: auto; margin-bottom: 1rem; border-radius: 8px;">
           
             <h3 class="title is-4">2. Learning of Subtasks via Gaussian Processes (GPs)</h3>
+            <img src="static/images/GMPSubtask1.png" alt="GPs" style="max-width: 100%; height: auto; margin-bottom: 1rem; border-radius: 8px;">
             <ul>
               <li><strong>Heteroscedastic Kernel Generation:</strong> Encapsulates each primitive using a GP that modulates a base squared-exponential kernel with local variance estimates, efficiently modeling the human execution's spatial dispersion.</li>
               <li><strong>Direct Via-Point Embedding:</strong> Constraints like exact routing through targets are directly embedded into the training framework. By constructing an augmented space of subtask data $D_i$ and noiseless via-points $\bar{D}_i$, the GP guarantees the generation of robust trajectories that perfectly intersect the specified constraints.</li>
             </ul>
           
             <h3 class="title is-4">3. Subtask Adaptation via Pathwise Conditioning</h3>
+            <img src="static/images/PathwisePosOri.png" alt="Pathwise" style="max-width: 100%; height: auto; margin-bottom: 1rem; border-radius: 8px;">
             <ul>
               <li><strong>Zero-Shot Adaptation:</strong> Real-time Pathwise Conditioning adapts the learned GPs to new spatial constraints or OoD object configurations without retraining or requiring additional demonstrations.</li>
               <li><strong>Matheron's Update Rule:</strong> By shifting from sampling after conditioning to applying a deterministic update directly onto a prior trajectory, the algorithm bypasses heavy computational bottlenecks. If the environment dictates modified via-points $\tilde{q}_i$ at times $\tilde{t}$, the updated trajectory $h_i^{post}$ is constructed instantaneously: <br><br>
