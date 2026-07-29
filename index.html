@@ -450,6 +450,100 @@
           </div>
       </section>
 
+      <!-- New Section Simulated environments for data acquisition -->
+      <section class="section planner-plots-section" id="simulated-environments">
+        <div class="container is-max-desktop">
+          <h2 class="title is-2 has-text-centered">Simulated Manipulation Environments</h2>
+          <p class="has-text-centered planner-plots-note">
+            We evaluated our proposed framework across complex simulated setups. 
+            Select an environment, task, and test scenario below to load and play the corresponding simulation video.
+          </p>
+      
+          <!-- Resumen visual de los entornos -->
+          <div class="columns is-multiline planner-study-grid mb-5">
+            <div class="column is-one-half">
+              <article class="planner-study-card">
+                <h3 class="title is-5">Kitchen Environment</h3>
+                <p>
+                  Evaluates long-horizon sequential skills and multi-step manipulation in a simulated kitchen domain.
+                </p>
+              </article>
+            </div>
+            <div class="column is-one-half">
+              <article class="planner-study-card">
+                <h3 class="title is-5">Table (Mesa) Environment</h3>
+                <p>
+                  Covers three distinct task domains: <em>Domestic Assistive</em>, <em>Medical Waste Sorting</em>, and <em>Food and Beverage Packing</em>, evaluated across multiple test variations.
+                </p>
+              </article>
+            </div>
+          </div>
+      
+          <!-- Controles con los 3 desplegables -->
+          <div class="planner-experiment-controls columns is-centered mt-4">
+            <!-- 1. Entorno -->
+            <div class="column is-narrow">
+              <div class="field">
+                <label class="label" for="sim-env-select">Environment</label>
+                <div class="control">
+                  <div class="select">
+                    <select id="sim-env-select">
+                      <option value="" disabled selected>Select Environment...</option>
+                      <option value="Kitchen">Kitchen</option>
+                      <option value="Mesa">Table (Mesa)</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+            <!-- 2. Tarea -->
+            <div class="column is-narrow">
+              <div class="field">
+                <label class="label" for="sim-task-select">Task</label>
+                <div class="control">
+                  <div class="select">
+                    <select id="sim-task-select" disabled>
+                      <option value="" disabled selected>Select Task...</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+            <!-- 3. Entorno de Prueba / Escenario -->
+            <div class="column is-narrow">
+              <div class="field">
+                <label class="label" for="sim-test-select">Test Environment</label>
+                <div class="control">
+                  <div class="select">
+                    <select id="sim-test-select" disabled>
+                      <option value="" disabled selected>Select Scenario...</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Mensaje de estado -->
+          <div id="sim-experiment-summary" class="has-text-centered mt-2 mb-4" role="status" aria-live="polite">
+            <p id="sim-summary-text" class="is-italic has-text-grey">Select an environment, task, and test environment to load the video.</p>
+          </div>
+      
+          <!-- Reproductor de vídeo -->
+          <div class="columns is-centered">
+            <div class="column is-eight-fifths has-text-centered">
+              <video id="sim-experiment-video" class="is-hidden" width="100%" controls muted autoplay style="border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <source id="sim-video-source" src="" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+      
+        </div>
+      </section>
+
       <!-- NEW SECTION: Signed Distance Fields -->
     <!--section class="section" id="sdf-safety">
       <div class="container is-max-desktop">

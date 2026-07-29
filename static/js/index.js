@@ -750,93 +750,116 @@ function buildLineLayout(title, yLabel) {
     };
 }
 
-// --- NUEVO CÓDIGO PARA EL REPRODUCTOR DE VIDEO ---
-function setupVideoPlayer() {
-    const taskSelect = document.getElementById('video-task-select');
-    const userSelect = document.getElementById('video-user-select');
-    const videoElement = document.getElementById('experiment-video');
-    const videoSource = document.getElementById('video-source');
-    const summaryText = document.getElementById('summary-text');
+function setupSimulatedVideoPlayer() {
+    const envSelect = document.getElementById('sim-env-select');
+    const taskSelect = document.getElementById('sim-task-select');
+    const testSelect = document.getElementById('sim-test-select');
+    const videoElement = document.getElementById('sim-experiment-video');
+    const videoSource = document.getElementById('sim-video-source');
+    const summaryText = document.getElementById('sim-summary-text');
 
-    if (!taskSelect || !userSelect || !videoElement) return;
+    if (!envSelect || !taskSelect || !testSelect || !videoElement) return;
 
-    const videoDatabase = {
-        'Pick_and_Place_user1': 'static/videos/User_1.mp4',
-        'Pick_and_Place_user2': 'static/videos/User_2.mp4',
-        'Pick_and_Place_user3': 'static/videos/User_3.mp4',
-        'Pick_and_Place_user4': 'static/videos/User_4.mp4',
-        'Pouring_Water_user1': 'static/videos/Agua.MOV', 
-        'Pouring_Water_user2': 'static/videos/Agua_2.mp4', 
-        'Box_user1': 'static/videos/Caja.mp4',
-        'bimanual_user1': 'static/videos/Bianual_adiran.mp4',
-        'bimanual_user2': 'static/videos/Bimanual_Laura.mp4',
-        'Handover_user1': 'static/videos/Pelota.MOV',
-        'Deformable_user1': 'static/videos/Sudadera.mp4'
+    // Configuración de tareas según el entorno seleccionado
+    const tasksMap = {
+        'Kitchen': [
+            { id: '1', name: 'Kitchen Task' }
+        ],
+        'Mesa': [
+            { id: '1', name: 'Domestic Assistive' },
+            { id: '2', name: 'Medical Waste Sorting' },
+            { id: '3', name: 'Food and Beverage Packing' }
+        ]
     };
 
-    // 1. Actualiza el menú de usuarios basándose en la tarea seleccionada
-    function updateAvailableUsers() {
-        const selectedTask = taskSelect.value;
-        
-        // Limpiamos el menú de usuarios dejando solo la opción por defecto
-        userSelect.innerHTML = '<option value="" disabled selected>Select User...</option>';
-        
-        // Ocultamos el vídeo y reiniciamos el texto
+    const numTestEnvs = 4; // Número de entornos de prueba (1 a 4)
+
+    function resetVideoState() {
         videoElement.classList.add('is-hidden');
         videoSource.src = '';
-        summaryText.innerHTML = "<em>Please select a user to load the demonstration video.</em>";
+        summaryText.innerHTML = "<em>Select environment, task, and test environment to load the video.</em>";
         summaryText.className = 'is-italic has-text-grey mt-2 mb-4';
+    }
 
-        if (!selectedTask) return;
+    // 1. Al cambiar el Entorno (Kitchen o Mesa)
+    envSelect.addEventListener('change', function() {
+        const selectedEnv = envSelect.value;
 
-        // Buscamos qué usuarios existen para esta tarea en concreto
-        const availableUsers = [];
-        for (const key in videoDatabase) {
-            if (key.startsWith(selectedTask + '_')) {
-                // Sacamos la parte del usuario (ej. quitamos "Box_" y nos queda "user1")
-                const userKey = key.replace(selectedTask + '_', '');
-                availableUsers.push(userKey);
-            }
+        taskSelect.innerHTML = '<option value="" disabled selected>Select Task...</option>';
+        testSelect.innerHTML = '<option value="" disabled selected>Select Test Environment...</option>';
+        testSelect.disabled = true;
+
+        if (!selectedEnv) {
+            taskSelect.disabled = true;
+            resetVideoState();
+            return;
         }
 
-        // Creamos las etiquetas <option> dinámicamente y las añadimos
-        availableUsers.sort().forEach(userKey => {
+        const availableTasks = tasksMap[selectedEnv] || [];
+        availableTasks.forEach(task => {
             const option = document.createElement('option');
-            option.value = userKey;
-            // Formateamos el texto para que se vea bien: "user1" -> "User 1"
-            option.textContent = userKey.replace('user', 'User ');
-            userSelect.appendChild(option);
+            option.value = task.id;
+            option.textContent = task.name;
+            taskSelect.appendChild(option);
         });
-    }
 
-    // 2. Reproduce el vídeo cuando se selecciona al usuario
-    function updateVideo() {
+        taskSelect.disabled = false;
+        resetVideoState();
+    });
+
+    // 2. Al cambiar la Tarea
+    taskSelect.addEventListener('change', function() {
         const selectedTask = taskSelect.value;
-        const selectedUser = userSelect.value;
 
-        if (selectedTask && selectedUser) {
-            const combinationKey = `${selectedTask}_${selectedUser}`;
-            const videoPath = videoDatabase[combinationKey];
+        testSelect.innerHTML = '<option value="" disabled selected>Select Test Environment...</option>';
 
-            if (videoPath) {
-                videoElement.classList.remove('is-hidden');
-                videoSource.src = videoPath;
-                videoElement.load();
-                videoElement.play().catch(e => console.log("Autoplay prevented:", e));
-
-                summaryText.innerHTML = `Showing demonstration: <strong>${taskSelect.options[taskSelect.selectedIndex].text}</strong> by <strong>${userSelect.options[userSelect.selectedIndex].text}</strong>`;
-                summaryText.className = 'has-text-info mt-2 mb-4';
-            }
+        if (!selectedTask) {
+            testSelect.disabled = true;
+            resetVideoState();
+            return;
         }
-    }
 
-    // Le decimos a "Task" que ejecute updateAvailableUsers al cambiar
-    taskSelect.addEventListener('change', updateAvailableUsers);
-    
-    // Le decimos a "User" que ejecute updateVideo al cambiar
-    userSelect.addEventListener('change', updateVideo);
+        for (let i = 1; i <= numTestEnvs; i++) {
+            const option = document.createElement('option');
+            option.value = i.toString();
+            option.textContent = `Test Environment ${i}`;
+            testSelect.appendChild(option);
+        }
+
+        testSelect.disabled = false;
+        resetVideoState();
+    });
+
+    // 3. Al seleccionar el Entorno de Prueba -> Rutas actualizadas a KitChenEdited y MesaEdited
+    testSelect.addEventListener('change', function() {
+        const selectedEnv = envSelect.value;
+        const selectedTask = taskSelect.value;
+        const selectedTestEnv = testSelect.value;
+
+        if (!selectedEnv || !selectedTask || !selectedTestEnv) return;
+
+        let videoPath = '';
+        if (selectedEnv === 'Kitchen') {
+            // Ruta hacia la carpeta KitChenEdited/
+            videoPath = `static/videos/KitChenEdited/Kitchen_${selectedTestEnv}.mp4`;
+        } else if (selectedEnv === 'Mesa') {
+            // Ruta hacia la carpeta MesaEdited/
+            videoPath = `static/videos/MesaEdited/Mesa_${selectedTask}_${selectedTestEnv}.mp4`;
+        }
+
+        videoElement.classList.remove('is-hidden');
+        videoSource.src = videoPath;
+        videoElement.load();
+        videoElement.play().catch(e => console.log("Autoplay prevented:", e));
+
+        const envText = envSelect.options[envSelect.selectedIndex].text;
+        const taskText = taskSelect.options[taskSelect.selectedIndex].text;
+        const testText = testSelect.options[testSelect.selectedIndex].text;
+
+        summaryText.innerHTML = `Showing: <strong>${envText}</strong> &rarr; <strong>${taskText}</strong> (${testText})`;
+        summaryText.className = 'has-text-info mt-2 mb-4';
+    });
 }
-// -------------------------------------------------
 
 async function fetchJson(path, timeoutMs) {
     const timeout = typeof timeoutMs === 'number' ? timeoutMs : 12000;
