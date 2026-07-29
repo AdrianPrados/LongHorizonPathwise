@@ -760,19 +760,19 @@ function setupSimulatedVideoPlayer() {
 
     if (!envSelect || !taskSelect || !testSelect || !videoElement) return;
 
-    // Configuración de tareas según el entorno seleccionado
+    // 1. AÑADIMOS 'numTests' a cada tarea para definir dinámicamente sus videos disponibles
     const tasksMap = {
         'Kitchen': [
-            { id: '1', name: 'Kitchen Task' }
+            // Pon aquí el número real de tests que tienes para Kitchen Task
+            { id: '1', name: 'Kitchen Task', numTests: 4 } 
         ],
         'Mesa': [
-            { id: '1', name: 'Domestic Assistive' },
-            { id: '2', name: 'Medical Waste Sorting' },
-            { id: '3', name: 'Food and Beverage Packing' }
+            // Define dinámicamente cuántos vídeos tiene cada tarea de Mesa
+            { id: '1', name: 'Domestic Assistive', numTests: 3 }, 
+            { id: '2', name: 'Medical Waste Sorting', numTests: 5 }, 
+            { id: '3', name: 'Food and Beverage Packing', numTests: 2 } 
         ]
     };
-
-    const numTestEnvs = 4; // Número de entornos de prueba (1 a 4)
 
     function resetVideoState() {
         videoElement.classList.add('is-hidden');
@@ -781,7 +781,6 @@ function setupSimulatedVideoPlayer() {
         summaryText.className = 'is-italic has-text-grey mt-2 mb-4';
     }
 
-    // 1. Al cambiar el Entorno (Kitchen o Mesa)
     envSelect.addEventListener('change', function() {
         const selectedEnv = envSelect.value;
 
@@ -807,9 +806,9 @@ function setupSimulatedVideoPlayer() {
         resetVideoState();
     });
 
-    // 2. Al cambiar la Tarea
     taskSelect.addEventListener('change', function() {
         const selectedTask = taskSelect.value;
+        const selectedEnv = envSelect.value;
 
         testSelect.innerHTML = '<option value="" disabled selected>Select Test Environment...</option>';
 
@@ -819,7 +818,13 @@ function setupSimulatedVideoPlayer() {
             return;
         }
 
-        for (let i = 1; i <= numTestEnvs; i++) {
+        // 2. RECUPERAMOS el número dinámico de tests buscando la tarea seleccionada en nuestro mapa
+        const availableTasks = tasksMap[selectedEnv] || [];
+        const taskObject = availableTasks.find(t => t.id === selectedTask);
+        const dynamicNumTests = taskObject ? taskObject.numTests : 0;
+
+        // 3. CREAMOS las opciones de test basados en el número que acabamos de leer
+        for (let i = 1; i <= dynamicNumTests; i++) {
             const option = document.createElement('option');
             option.value = i.toString();
             option.textContent = `Test Environment ${i}`;
@@ -830,7 +835,6 @@ function setupSimulatedVideoPlayer() {
         resetVideoState();
     });
 
-    // 3. Al seleccionar el Entorno de Prueba -> Rutas actualizadas a KitChenEdited y MesaEdited
     testSelect.addEventListener('change', function() {
         const selectedEnv = envSelect.value;
         const selectedTask = taskSelect.value;
@@ -840,10 +844,8 @@ function setupSimulatedVideoPlayer() {
 
         let videoPath = '';
         if (selectedEnv === 'Kitchen') {
-            // Ruta hacia la carpeta KitChenEdited/
             videoPath = `static/videos/KitChenEdited/Kitchen_${selectedTestEnv}.mp4`;
         } else if (selectedEnv === 'Mesa') {
-            // Ruta hacia la carpeta MesaEdited/
             videoPath = `static/videos/MesaEdited/Mesa_${selectedTask}_${selectedTestEnv}.mp4`;
         }
 
