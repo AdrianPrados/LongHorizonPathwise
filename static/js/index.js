@@ -892,6 +892,94 @@ function setupSimulatedVideoPlayer() {
     });
 }
 
+
+function setupRealVideoPlayer() {
+    const taskSelect = document.getElementById('real-task-select');
+    const phaseSelect = document.getElementById('real-phase-select');
+    const envSelect = document.getElementById('real-env-select');
+    const videoElement = document.getElementById('real-experiment-video');
+    const videoSource = document.getElementById('real-video-source');
+    const summaryText = document.getElementById('real-summary-text');
+
+    if (!taskSelect || !phaseSelect || !envSelect || !videoElement) return;
+
+    function resetVideoState() {
+        videoElement.classList.add('is-hidden');
+        videoSource.src = '';
+        summaryText.innerHTML = "<em>Select task and video type to load the video.</em>";
+        summaryText.className = 'is-italic has-text-grey mt-2 mb-4';
+    }
+
+    function updateVideo() {
+        const task = taskSelect.value;
+        const phase = phaseSelect.value;
+        const env = envSelect.value;
+
+        if (!task || !phase) return;
+        
+        // Si es ejecución pero no han elegido el entorno (Estático/Dinámico), no mostramos vídeo aún
+        if (phase === 'Execution' && !env) return;
+
+        // Construir el nombre del archivo en base a tu convención
+        let fileName = '';
+        if (phase === 'Demostracion') {
+            fileName = `${task}Demostracion.mp4`; // ej: CafeteraDemostracion.mp4
+        } else if (phase === 'Execution') {
+            fileName = `${task}${env}.mp4`;       // ej: CafeteraEstatico.mp4
+        }
+
+        // Ruta a la carpeta RealX2
+        const videoPath = `static/videos/RealX2/${fileName}`;
+
+        // Cargar y reproducir el vídeo
+        videoElement.classList.remove('is-hidden');
+        videoSource.src = videoPath;
+        videoElement.load();
+        videoElement.play().catch(e => console.log("Autoplay prevented:", e));
+
+        // Actualizar el texto descriptivo
+        const taskText = taskSelect.options[taskSelect.selectedIndex].text;
+        if (phase === 'Demostracion') {
+            summaryText.innerHTML = `Showing: <strong>${taskText}</strong> &rarr; <strong>Human Demonstration</strong>`;
+        } else {
+            const envText = envSelect.options[envSelect.selectedIndex].text;
+            summaryText.innerHTML = `Showing: <strong>${taskText}</strong> &rarr; <strong>Robot Execution</strong> (${envText})`;
+        }
+        summaryText.className = 'has-text-info mt-2 mb-4';
+    }
+
+    // Al cambiar la tarea
+    taskSelect.addEventListener('change', function() {
+        phaseSelect.disabled = false;
+        phaseSelect.value = "";
+        envSelect.value = "";
+        envSelect.disabled = true;
+        resetVideoState();
+    });
+
+    // Al cambiar si queremos demostración o robot
+    phaseSelect.addEventListener('change', function() {
+        const phase = phaseSelect.value;
+        
+        if (phase === 'Execution') {
+            // Habilitar selección de estático/dinámico
+            envSelect.disabled = false;
+            envSelect.value = ""; 
+            resetVideoState();
+        } else {
+            // Si es demostración, no hace falta entorno. Deshabilitar y cargar vídeo.
+            envSelect.disabled = true;
+            envSelect.value = "";
+            updateVideo();
+        }
+    });
+
+    // Al seleccionar estático/dinámico
+    envSelect.addEventListener('change', function() {
+        updateVideo();
+    });
+}
+
 async function fetchJson(path, timeoutMs) {
     const timeout = typeof timeoutMs === 'number' ? timeoutMs : 12000;
     const pageUrl = new URL(window.location.href);
@@ -1064,6 +1152,7 @@ function initPage() {
     // Render plots first so optional UI scripts cannot block this section.
     renderPlannerPlots();
     setupSimulatedVideoPlayer();
+    setupRealVideoPlayer()
 
     var options = {
 		slidesToScroll: 1,

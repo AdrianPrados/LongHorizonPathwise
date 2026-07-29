@@ -400,53 +400,74 @@
             </div>
           </div>
 
+          <!-- Controles de los vídeos reales -->
           <div class="planner-experiment-controls columns is-centered mt-4">
+            
+            <!-- 1. Pestaña de Tarea -->
             <div class="column is-narrow">
               <div class="field">
-                <label class="label" for="video-task-select">Dual-Arm Task</label>
+                <label class="label" for="real-task-select">Task</label>
                 <div class="control">
                   <div class="select">
-                    <select id="video-task-select">
+                    <select id="real-task-select">
                       <option value="" disabled selected>Select a Task...</option>
-                      <option value="Pick_and_Place">Pick and Place</option>
-                      <option value="Pouring_Water">Pouring Water</option>
-                      <option value="Box">Box Manipulation</option>
-                      <option value="bimanual">Bimanual Task</option>
-                      <option value="Handover">Handover Sphere</option>
-                      <option value="Deformable">Dual-Arm Hoodie</option>
+                      <option value="Cafetera">1) Preparing a Capsule Coffee</option>
+                      <option value="Cajas">2) Sorting Objects into Boxes</option>
+                      <option value="Latas">3) Rearranging Cans on a Shelf</option>
+                      <option value="Barrer">4) Wiping a Table</option>
                     </select>
                   </div>
                 </div>
               </div>
             </div>
 
+            <!-- 2. Pestaña de Demostración vs Ejecución -->
             <div class="column is-narrow">
               <div class="field">
-                <label class="label" for="video-user-select">User</label>
+                <label class="label" for="real-phase-select">Video Type</label>
                 <div class="control">
                   <div class="select">
-                    <select id="video-user-select">
-                      <option value="" disabled selected>Select User...</option>
+                    <select id="real-phase-select" disabled>
+                      <option value="" disabled selected>Select Type...</option>
+                      <option value="Demostracion">Human Demonstration</option>
+                      <option value="Execution">Robot Execution</option>
                     </select>
                   </div>
                 </div>
               </div>
             </div>
+
+            <!-- 3. Pestaña de Entorno (Estático vs Dinámico) -->
+            <div class="column is-narrow">
+              <div class="field">
+                <label class="label" for="real-env-select">Environment Setup</label>
+                <div class="control">
+                  <div class="select">
+                    <select id="real-env-select" disabled>
+                      <option value="" disabled selected>Select Environment...</option>
+                      <option value="Estatico">Static Setup</option>
+                      <option value="Dinamico">Dynamic Changes</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
 
-          <div id="planner-experiment-summary" class="has-text-centered mt-2 mb-4" role="status" aria-live="polite">
-            <p id="summary-text" class="is-italic has-text-grey">Select a task and a user to load the demonstration video.</p>
+          <!-- Resumen del vídeo que se está mostrando -->
+          <div id="real-experiment-summary" class="has-text-centered mt-2 mb-4" role="status" aria-live="polite">
+            <p id="real-summary-text" class="is-italic has-text-grey">Select task and video type to load the video.</p>
           </div>
 
+          <!-- Reproductor de vídeo -->
           <div class="columns is-centered">
             <div class="column is-eight-fifths has-text-centered">
-              <video id="experiment-video" class="is-hidden" width="100%" controls muted autoplay style="border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                <source id="video-source" src="" type="video/mp4">
+              <video id="real-experiment-video" class="is-hidden" width="100%" controls muted autoplay style="border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <source id="real-video-source" src="" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
             </div>
-          </div>
-
           </div>
       </section>
 
