@@ -455,17 +455,21 @@
         <div class="container is-max-desktop">
           <h2 class="title is-2 has-text-centered">Simulated Long Horizon Tasks</h2>
           <p class="has-text-centered planner-plots-note">
-            We evaluated our proposed framework across complex simulated setups. 
-            Select an environment, task, and test scenario below to load and play the corresponding simulation video.
+            We evaluate long-horizon performance using 2 PyBullet-based benchmarks. The objective is to demonstrate the adaptive performance of the 
+            algorithm across different tasks in long-horizon environments. To this end, various tasks were designed where environmental elements are 
+            modified or the subtasks are reordered, allowing the robot to demonstrate its efficiency in solving these tasks without needing to generate 
+            a new policy. This is achieved by applying Pathwise Conditioning to the movement primitives learned with Gaussian Processes.
           </p>
       
           <!-- Resumen visual de los entornos -->
           <div class="columns is-multiline planner-study-grid mb-5">
             <div class="column is-one-half">
               <article class="planner-study-card">
-                <h3 class="title is-5">Kitchen Environment</h3>
+                <h3 class="title is-5">Franka Kitchen Environment</h3>
                 <p>
-                  Evaluates long-horizon sequential skills and multi-step manipulation in a simulated kitchen domain.
+                  Evaluates long-horizon sequential skills and multi-step manipulation in a simulated kitchen domain. 
+                  The Franka Kitchen environment consists of resequenceable culinary chores, for which we generated 25 distinct 
+                  long-horizon tasks with 25 demonstrations each.
                 </p>
               </article>
             </div>
@@ -473,7 +477,8 @@
               <article class="planner-study-card">
                 <h3 class="title is-5">Table Environment</h3>
                 <p>
-                  Covers three distinct task domains: <em>Domestic Assistive</em>, <em>Medical Waste Sorting</em>, and <em>Food and Beverage Packing</em>, evaluated across multiple test variations.
+                  The Franka LHT environment features 3 tabletop distinct task: <em>Domestic Assistive</em>, <em>Medical Waste Sorting</em>, 
+                  and <em>Food and Beverage Packing</em>, evaluated across multiple test variations.
                 </p>
               </article>
             </div>
@@ -490,7 +495,7 @@
                     <select id="sim-env-select">
                       <option value="" disabled selected>Select Environment...</option>
                       <option value="Kitchen">Kitchen</option>
-                      <option value="Mesa">Table (Mesa)</option>
+                      <option value="Mesa">Table</option>
                     </select>
                   </div>
                 </div>
