@@ -1035,6 +1035,7 @@ function initPage() {
 
     // Iniciar la lógica de los videos interactivos
     setupVideoPlayer();
+    setupSimulatedVideoPlayer();
 
     var options = {
 		slidesToScroll: 1,
