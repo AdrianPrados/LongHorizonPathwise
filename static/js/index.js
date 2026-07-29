@@ -925,7 +925,7 @@ function setupRealVideoPlayer() {
         if (phase === 'Demostracion') {
             fileName = `${task}Demostracion.mp4`; // ej: CafeteraDemostracion.mp4
         } else if (phase === 'Execution') {
-            fileName = `${task}${env}.mp4`;       // ej: CafeteraEstatico.mp4
+            fileName = `${task}${env}x2.mp4`;       // ej: CafeteraEstaticox2.mp4
         }
 
         // Ruta a la carpeta RealX2
