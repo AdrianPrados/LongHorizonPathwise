@@ -1032,9 +1032,6 @@ async function renderPlannerPlots() {
 function initPage() {
     // Render plots first so optional UI scripts cannot block this section.
     renderPlannerPlots();
-
-    // Iniciar la lógica de los videos interactivos
-    setupVideoPlayer();
     setupSimulatedVideoPlayer();
 
     var options = {
