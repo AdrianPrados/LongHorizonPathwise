@@ -32,30 +32,30 @@ colors = ['r', 'g', 'b', 'c', 'm', 'y', 'k', 'orange', 'purple', 'brown', 'pink'
 # ============================================================================
 
 object_location_dict = {
-    "table"            : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Objects/wood_table/urdf/wood_table.urdf",
-    "rack"             : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Objects/Rack/Rack.urdf",
-    "bucket"           : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Objects/bucket/bucketv02/bucketv02.urdf",
-    "banana"           : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Objects/banana/banana.urdf",
-    "YcbGelatinBox"    : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Objects/YcbGelatinBox/model.urdf",
-    "carrot"           : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Objects/carrot/carrot.urdf",
-    "bucket_cap"       : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Objects/bucket/bucket_v03/Bucket_cap_v02.urdf",
-    "glass"            : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Objects/glass/glass.urdf",
-    "juice_bottle"     : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Objects/juice_bottle/juice_bottle.urdf",
-    "strawberry"       : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Objects/strawberry/strawberry.urdf",
-    "Tray"             : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Objects/Tray/Tray.urdf",
-    "bin"              : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Objects/bin/bin.urdf",
-    "syring"           : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Objects/Syring/Syring.urdf",
-    "syrup_bottle"     : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Objects/syrup_bottle/syrup_bottle.urdf",
-    "sunscreen"        : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Objects/sunscreen/sunscreen.urdf",
-    "box"              : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Objects/open_cardboard box/cardboard.urdf",
-    "wooden_crate"     : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Objects/wooden_crate/wooden_crate.urdf",
-    "bottle01"         : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Objects/plastic_water_bottle/urdf/plastic_water_bottle.urdf",
-    "bottle02"         : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Objects/plastic_water_bottle/urdf/plastic_water_bottle.urdf",
-    "bottle03"         : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Objects/plastic_water_bottle/urdf/plastic_water_bottle.urdf",
-    "bottle04"         : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Objects/plastic_water_bottle/urdf/plastic_water_bottle.urdf",
-    "YcbMustardBottle" : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Objects/YcbMustardBottle/model.urdf",
-    "kelloges"         : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Objects/kelloges/kelloges.urdf",
-    "dominosugar"      : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Objects/dominosugar/dominosugar.urdf",
+    "table"            : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Objects/wood_table/urdf/wood_table.urdf",
+    "rack"             : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Objects/Rack/Rack.urdf",
+    "bucket"           : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Objects/bucket/bucketv02/bucketv02.urdf",
+    "banana"           : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Objects/banana/banana.urdf",
+    "YcbGelatinBox"    : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Objects/YcbGelatinBox/model.urdf",
+    "carrot"           : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Objects/carrot/carrot.urdf",
+    "bucket_cap"       : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Objects/bucket/bucket_v03/Bucket_cap_v02.urdf",
+    "glass"            : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Objects/glass/glass.urdf",
+    "juice_bottle"     : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Objects/juice_bottle/juice_bottle.urdf",
+    "strawberry"       : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Objects/strawberry/strawberry.urdf",
+    "Tray"             : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Objects/Tray/Tray.urdf",
+    "bin"              : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Objects/bin/bin.urdf",
+    "syring"           : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Objects/Syring/Syring.urdf",
+    "syrup_bottle"     : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Objects/syrup_bottle/syrup_bottle.urdf",
+    "sunscreen"        : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Objects/sunscreen/sunscreen.urdf",
+    "box"              : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Objects/open_cardboard box/cardboard.urdf",
+    "wooden_crate"     : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Objects/wooden_crate/wooden_crate.urdf",
+    "bottle01"         : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Objects/plastic_water_bottle/urdf/plastic_water_bottle.urdf",
+    "bottle02"         : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Objects/plastic_water_bottle/urdf/plastic_water_bottle.urdf",
+    "bottle03"         : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Objects/plastic_water_bottle/urdf/plastic_water_bottle.urdf",
+    "bottle04"         : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Objects/plastic_water_bottle/urdf/plastic_water_bottle.urdf",
+    "YcbMustardBottle" : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Objects/YcbMustardBottle/model.urdf",
+    "kelloges"         : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Objects/kelloges/kelloges.urdf",
+    "dominosugar"      : "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Objects/dominosugar/dominosugar.urdf",
 }
 
 def set_object_intrinsic_properties(object_id, fixed_base, obj_name):
@@ -507,7 +507,7 @@ def draw_debug_target(pos, label, is_grasp=True):
 
 def chain_gp_pathwise_segments(scene=1, task=1, demo=1, manual_objects=None, robot_id=None, ee_idx=11):
     
-    pkl_path = f'/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/Trajectory/{scene}.{task}.{demo}/location.pkl'
+    pkl_path = f'/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/Trajectory/{scene}.{task}.{demo}/location.pkl'
     
     if(scene == 1):
         loaded_objects = domestic_assistive_tasks()
@@ -519,7 +519,7 @@ def chain_gp_pathwise_segments(scene=1, task=1, demo=1, manual_objects=None, rob
         print(f"[Error] Unknow scene: {scene}. loading scene 1.")
         loaded_objects = domestic_assistive_tasks()
     
-    base_dir = '/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Segmentation-and-Grouping-Model/SegmentationProb/scripts/LHT_SegmentsFolder' 
+    base_dir = '/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Segmentation-and-Grouping-Model/SegmentationProb/scripts/LHT_SegmentsFolder' 
     print(f"--- Procesando Cadena S{scene} | T{task} | Demo {demo} ---")
 
     if not os.path.exists(pkl_path): object_loc_dict = {}
@@ -742,7 +742,7 @@ if __name__ == '__main__':
     p.resetDebugVisualizerCamera(1.8, 250, -40, [0.8, 0.4, 0.5])
 
     franka_robot = p.loadURDF(
-        "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/Franka-LHT-Simulator/franka_emika_panda_pybullet-master/panda_robot/model_description/black_panda.urdf",
+        "/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/Franka-LHT-Simulator/franka_emika_panda_pybullet-master/panda_robot/model_description/black_panda.urdf",
         [0.62, 0.62, 0.61], [0,0,1,1], 
         useFixedBase=True, flags=p.URDF_USE_SELF_COLLISION_EXCLUDE_ALL_PARENTS
     )

@@ -22,7 +22,7 @@
   <collision>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="meshes/decomp.obj" scale="0.01 0.01 0.006"/>
+      <mesh filename="meshes/decomp.obj" scale="0.01 0.01 0.0000006"/>
     </geometry>
   </collision>
 </link>

@@ -435,7 +435,7 @@ def main3d(i):
     
     seed = 440773
     np.random.seed(seed)
-    fname = f'../h5 files/IzquierdaLongTest.h5'
+    fname = f'../h5 files/IzquierdaLongLatasDemo.h5'
     joint_data, tf_data, wrench_data, gripper_data = read_robot_data(fname)
     
     
@@ -492,7 +492,7 @@ def main3d(i):
     gripper_segments = segment(gripper_time, gripper_pos, base_thresh=thresh, segment_size=ssize, window_size=wsize, grace_thresh=gthresh, plot=False)
     
     #segments = probabilistically_combine([traj_segments], len(traj_pos), 1, n_samples=50, n_pass=2, plot=True)
-    segments = [traj_segments, gripper_segments]
+    segments = [traj_segments]
     return segments,traj_pos
 
 #Example process using a 2D trajectory with a single data stream
@@ -544,7 +544,7 @@ if __name__ == '__main__':
     
     #?Segmentation in 3D
     if mode == 3:
-        for i in range(3): #* Number of demos
+        for i in range(1): #* Number of demos
             print(f"Demo {i}")
             segments,demo = main3d(i=i)
             print(segments)

@@ -2,12 +2,12 @@
 <robot name="model.urdf">
   <link name="baseLink">
     <contact>
-      <friction_anchor/>
+      <!--friction_anchor/>
       <lateral_friction value="0.8"/>
       <spinning_friction value="0.001"/>
       <rolling_friction value="0.001"/>
       <contact_cfm value="0.0"/>
-      <contact_erp value="1.0"/>
+      <contact_erp value="1.0"/-->
     </contact>
     <inertial>
        <origin rpy="0 0 0.1" xyz="0.005 0.005 -0.015"/>
@@ -26,9 +26,9 @@
     <collision >
       <origin rpy="0 0 1.57" xyz="0 0 0"/>
       <geometry>
-    	 	<mesh filename="collision_vhacd.obj" scale="1 1 1"/>
+    	 	<mesh filename="collision_vhacd.obj" scale="1 1 0.6"/>
       </geometry>
-      <contact contact_stiffness="500000" conatct_damping="5000"/>
+      <!--contact contact_stiffness="500000" conatct_damping="5000"/-->
     </collision>
   </link>
 </robot>

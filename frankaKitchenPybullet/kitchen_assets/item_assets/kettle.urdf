@@ -38,12 +38,12 @@
                 <color rgba=".9 .9 .9 1"/>
             </material>
         </visual>
-        <collision>
+        <!--collision>
             <origin xyz="0 0 0.259" rpy="0 1.57 0"/>
             <geometry>
                 <capsule radius="0.032" length="0.2"/>
             </geometry>
-        </collision>
+        </collision-->
         <visual>
             <origin xyz="0.092 0 0.186" rpy="0 0 0"/>
             <geometry>
@@ -53,12 +53,12 @@
                 <color rgba=".9 .9 .9 1"/>
             </material>
         </visual>
-        <collision>
+        <!--collision>
             <origin xyz="0.092 0 0.18" rpy="0 0 0"/>
             <geometry>
                 <capsule radius="0.023" length="0.12"/>
             </geometry>
-        </collision>
+        </collision-->
         <visual>
             <origin xyz="-0.092 0 0.185" rpy="0 0 0"/>
             <geometry>
@@ -68,12 +68,12 @@
                 <color rgba=".9 .9 .9 1"/>
             </material>
         </visual>
-        <collision>
+        <!--collision>
             <origin xyz="-0.092 0 0.18" rpy="0 0 0"/>
             <geometry>
                 <capsule radius="0.023" length="0.12"/>
             </geometry>
-        </collision>
+        </collision-->
     </link>
     <link name="kettleroot_2">
 		<inertial>

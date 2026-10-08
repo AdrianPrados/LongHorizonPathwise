@@ -8,12 +8,12 @@ kitchenStartOrientationQ = p.getQuaternionFromEuler(config.kitchenStartOrientati
 
 def loadFrankaKitchen():
 
-    kitchen = p.loadURDF("/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/frankaKitchenPybullet/kitchen_assets/kitchen_env_model.urdf", config.kitchenStartPosition, kitchenStartOrientationQ, useFixedBase=True, globalScaling=config.kitchenGlobalScaling)
-    kettle = p.loadURDF("/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/frankaKitchenPybullet/kitchen_assets/item_assets/kettle.urdf", config.kettleStartPosition, kitchenStartOrientationQ, useFixedBase=False, globalScaling=config.kitchenGlobalScaling)
+    kitchen = p.loadURDF("/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/frankaKitchenPybullet/kitchen_assets/kitchen_env_model.urdf", config.kitchenStartPosition, kitchenStartOrientationQ, useFixedBase=True, globalScaling=config.kitchenGlobalScaling)
+    kettle = p.loadURDF("/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/frankaKitchenPybullet/kitchen_assets/item_assets/kettle.urdf", config.kettleStartPosition, kitchenStartOrientationQ, useFixedBase=False, globalScaling=config.kitchenGlobalScaling)
 
     # Change textures
-    textureMarble = p.loadTexture("/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/frankaKitchenPybullet/kitchen_assets/textures/marble1.png")
-    textureMetal = p.loadTexture("/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/frankaKitchenPybullet/kitchen_assets/textures/metal1.png")
+    textureMarble = p.loadTexture("/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/frankaKitchenPybullet/kitchen_assets/textures/marble1.png")
+    textureMetal = p.loadTexture("/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/frankaKitchenPybullet/kitchen_assets/textures/metal1.png")
 
     # Marble counter tops (doesn't seem to work for sink counter top)
     p.changeVisualShape(kitchen, 2, textureUniqueId=textureMarble)
@@ -45,48 +45,55 @@ def loadFrankaKitchen():
     p.changeVisualShape(kitchen, 54, textureUniqueId=textureMetal)
     p.changeVisualShape(kitchen, 57, textureUniqueId=textureMetal)
 
-    # Kettle (wood1.png file doesn't seem to load)
+    # Kettle 
     p.changeVisualShape(kettle, 0, textureUniqueId=textureMetal)
 
     return kitchen, kettle
 
 def updateFrankaKitchen(kitchen):
 
-    knob1 = 6
-    knob2 = 9
-    knob3 = 12
-    knob4 = 15
-
-    burner1 = 18
-    burner2 = 20
-    burner3 = 22
-    burner4 = 24
+    knobs = [6, 9, 12, 15]
+    burners = [18, 20, 22, 24]
 
     lightSwitch = 29
     lightBlock = 31
     lightLink = 32
 
-    # Manually operate the burners and light
-    if p.getJointState(kitchen, knob1)[0] >= -1.57 and p.getJointState(kitchen, knob1)[0] < -1.57 / 2:
-        p.setJointMotorControl2(kitchen, burner1, p.POSITION_CONTROL, targetPosition=-.009 / 2)
-    elif p.getJointState(kitchen, knob1)[0] >= -1.57 / 2 and p.getJointState(kitchen, knob1)[0] < 0:
-        p.setJointMotorControl2(kitchen, burner1, p.POSITION_CONTROL, targetPosition=0)
-    if p.getJointState(kitchen, knob2)[0] >= -1.57 and p.getJointState(kitchen, knob2)[0] < -1.57 / 2:
-        p.setJointMotorControl2(kitchen, burner2, p.POSITION_CONTROL, targetPosition=-.009 / 2)
-    elif p.getJointState(kitchen, knob2)[0] >= -1.57 / 2 and p.getJointState(kitchen, knob2)[0] < 0:
-        p.setJointMotorControl2(kitchen, burner2, p.POSITION_CONTROL, targetPosition=0)
-    if p.getJointState(kitchen, knob3)[0] >= -1.57 and p.getJointState(kitchen, knob3)[0] < -1.57 / 2:
-        p.setJointMotorControl2(kitchen, burner3, p.POSITION_CONTROL, targetPosition=-.009 / 2)
-    elif p.getJointState(kitchen, knob3)[0] >= -1.57 / 2 and p.getJointState(kitchen, knob3)[0] < 0:
-        p.setJointMotorControl2(kitchen, burner3, p.POSITION_CONTROL, targetPosition=0)
-    if p.getJointState(kitchen, knob4)[0] >= -1.57 and p.getJointState(kitchen, knob4)[0] < -1.57 / 2:
-        p.setJointMotorControl2(kitchen, burner4, p.POSITION_CONTROL, targetPosition=-.009 / 2)
-    elif p.getJointState(kitchen, knob4)[0] >= -1.57 / 2 and p.getJointState(kitchen, knob4)[0] < 0:
-        p.setJointMotorControl2(kitchen, burner4, p.POSITION_CONTROL, targetPosition=0)
+    # --- UMBRAL DE SENSIBILIDAD ---
+    # 0 es apagado, -1.57 es girado al máximo.
+    umbral_fuego = -0.8 
+    umbral_luz = -0.2
 
-    if p.getJointState(kitchen, lightSwitch)[0] >= -.7 and p.getJointState(kitchen, lightSwitch)[0] < -.7 / 2:
+    # ==========================================
+    # 1. FOGONES: Efecto Click y Anulación de muelle
+    # ==========================================
+    for knob, burner in zip(knobs, burners):
+        if p.getJointState(kitchen, knob)[0] < umbral_fuego:
+            # Encender fuego
+            p.setJointMotorControl2(kitchen, burner, p.POSITION_CONTROL, targetPosition=-.009 / 2)
+            # EFECTO CLICK: Forzar el mando a la posición final y bloquearlo
+            p.setJointMotorControl2(kitchen, knob, p.POSITION_CONTROL, targetPosition=-1.57, force=5)
+        else:
+            # Apagar fuego
+            p.setJointMotorControl2(kitchen, burner, p.POSITION_CONTROL, targetPosition=0)
+            # FRICCIÓN LIBRE: Anular el efecto muelle para que no baile solo
+            p.setJointMotorControl2(kitchen, knob, p.VELOCITY_CONTROL, targetVelocity=0, force=1)
+
+    # ==========================================
+    # 2. INTERRUPTOR LUZ: Efecto Click
+    # ==========================================
+    if p.getJointState(kitchen, lightSwitch)[0] < umbral_luz:
         p.changeVisualShape(kitchen, lightLink, rgbaColor=[2, 2, 2, 1])
         p.setJointMotorControl2(kitchen, lightBlock, p.POSITION_CONTROL, targetPosition=-.05 / 2)
-    elif p.getJointState(kitchen, lightSwitch)[0] >= -.7 / 2 and p.getJointState(kitchen, lightSwitch)[0] < 0:
+        p.setJointMotorControl2(kitchen, lightSwitch, p.POSITION_CONTROL, targetPosition=-0.7, force=5)
+    else:
         p.changeVisualShape(kitchen, lightLink, rgbaColor=[.1, .1, .1, 1])
         p.setJointMotorControl2(kitchen, lightBlock, p.POSITION_CONTROL, targetPosition=0)
+        p.setJointMotorControl2(kitchen, lightSwitch, p.VELOCITY_CONTROL, targetVelocity=0, force=1)
+
+    # ==========================================
+    # 3. PUERTAS: Evitar que reboten al soltarlas
+    # ==========================================
+    # Slide (41) y Hinge (46)
+    p.setJointMotorControl2(kitchen, 41, p.VELOCITY_CONTROL, targetVelocity=0, force=2)
+    p.setJointMotorControl2(kitchen, 46, p.VELOCITY_CONTROL, targetVelocity=0, force=2)

@@ -71,7 +71,6 @@ def replay_trajectory(mjl_path):
                     maxVelocity=9.0  # Velocidad máxima permitida
                 )
         
-        # Avanzar un paso en la simulación (tu env.py ya incluye el p.stepSimulation() y el delay)
         env.update()
 
     print("Reproducción de la trayectoria terminada.")
@@ -83,5 +82,5 @@ def replay_trajectory(mjl_path):
         env.update()
 
 if __name__ == "__main__":
-    archivo_mjl = "kitchen_demos_multitask/postcorl_microwave_bottomknob_switch_slide/kitchen_playdata_2019_07_11_13_32_19.mjl"
+    archivo_mjl = "kitchen_demos_multitask/friday_kettle_bottomknob_hinge_slide/kitchen_playdata_2019_06_28_13_35_02.mjl"
     replay_trajectory(archivo_mjl)

@@ -219,7 +219,7 @@ def get_demo_segments(time, traj_pos, traj_quat):
 # =====================================================================
 if __name__ == '__main__':
     
-    INPUT_BASE_DIR = '/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/frankaKitchenPybullet/demos_trajs'
+    INPUT_BASE_DIR = '/home/adrian/Escritorio/ImitationLearning/LongHorizonSegmentation/LongTaskRepo/frankaKitchenPybullet/demos_trajs'
     OUTPUT_BASE_DIR = 'KitchenFranka_SegmentsFolder'
     TARGET_LENGTH = 1000 # Longitud común para combinar todas las demos
 

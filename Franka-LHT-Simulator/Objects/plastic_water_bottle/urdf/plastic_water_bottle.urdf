@@ -74,7 +74,7 @@
           rgba="0.41176 0.13333 0.96863 1" />
       </material>
     </visual>
-    <collision>
+    <!--collision>
       <origin
         xyz="0 0 0"
         rpy="0 0 0" />
@@ -82,7 +82,7 @@
         <mesh
           filename="package://plastic_water_bottle/meshes/link1.STL" />
       </geometry>
-    </collision>
+    </collision-->
   </link>
   <joint
     name="joint1"

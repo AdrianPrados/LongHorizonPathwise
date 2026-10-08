@@ -7,10 +7,9 @@ import matplotlib.pyplot as plt
 
 from robot import Robot
 from utils.parse_mjl import parse_mjl_logs
+import math
 
-# ==========================================
-# 1. FUNCIÓN DE EXTRACCIÓN EN PYBULLET
-# ==========================================
+
 def extract_trajectories_pybullet(mjl_path, ee_link_name="panda_link8"):
     """
     Lee un archivo .mjl y usa PyBullet para calcular la trayectoria (x,y,z) y 
@@ -47,7 +46,13 @@ def extract_trajectories_pybullet(mjl_path, ee_link_name="panda_link8"):
     ee_orientations = []
 
     for qpos in qpos_trajectory:
-        robot_qpos = qpos[:9] 
+        # Convertimos a lista para poder modificar el valor
+        robot_qpos = list(qpos[:9])
+        
+        # --- CORRECCIÓN: AÑADIR EL OFFSET DE LA MUÑECA ---
+        offset_muneca = math.pi / 2
+        robot_qpos[5] = robot_qpos[5] + offset_muneca
+        # --------------------------------------------------
         
         for i, joint_idx in enumerate(movable_joints):
             if i < len(robot_qpos):
@@ -140,8 +145,8 @@ def plot_all_trajectories(all_positions):
 # ==========================================
 if __name__ == "__main__":
     
-    CARPETA_ENTRADA = "kitchen_demos_multitask/friday_kettle_bottomknob_hinge_slide"
-    CARPETA_SALIDA = "demos_trajs/traj_friday_kettle_bottomknob_hinge_slide"
+    CARPETA_ENTRADA = "kitchen_demos_multitask/postcorl_microwave_kettle_switch_hinge"
+    CARPETA_SALIDA = "demos_trajs/postcorl_microwave_kettle_switch_hinge"
     
     print("Iniciando extracción masiva...")
     lista_posiciones_3d = process_all_mjl_files(CARPETA_ENTRADA, CARPETA_SALIDA)
