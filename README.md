@@ -132,4 +132,32 @@ For full details and supplementary material, visit our Project Webpage (https://
 
 # Citation
 
-If you use this code or method in your research, please cite our paper:
+If you use this code or method in your research, please cite our papers:
+## Segmentation Paper
+
+```bibtex
+@article{prados2025segment,
+  title={Segment, compare, and learn: Creating movement libraries of complex task for learning from demonstration},
+  author={Prados, Adrian and Espinoza, Gonzalo and Moreno, Luis and Barber, Ramon},
+  journal={Biomimetics},
+  volume={10},
+  number={1},
+  pages={64},
+  year={2025},
+  publisher={MDPI}
+}
+```
+## Pathwise Conditioning Paper
+
+```bibtex
+@inproceedings{prados2026task,
+  title={Task Generalization with Pathwise Conditioning of Gaussian Process for Learning from Demonstration},
+  author={Prados, Adrian and Espinoza, Gonzalo and Mendez, Alberto and Barber, Ramon},
+  booktitle={2026 IEEE International Conference on Robotics and Automation (ICRA)},
+  pages={9391--9398},
+  year={2026},
+  organization={IEEE}
+}
+```
+
+## Long Horizon Paper
